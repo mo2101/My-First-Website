@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image:url(../background.JPEG);
+    background-image:url(../pics/background.JPEG);
     background-size: 1000%; /* Adjusted for better scaling */
     background-position: center;
     background-repeat: no-repeat;
@@ -110,84 +110,84 @@ body {
     transition: transform 400ms ease;
 }
 
-.cards .red { background-image: url(../bmw.jpg);
+.cards .red { background-image: url(../pics/bmw.jpg);
 background-position-x: right;
 background-position-y: center;
 background-size: 100%;
 }
-.cards .blue { background-image: url(../challengerblue.JPG);
+.cards .blue { background-image: url(../pics/challengerblue.JPG);
 background-size: cover;
 background-position-y: center; }
-.cards .green { background-image: url(../ycar.JPG); 
+.cards .green { background-image: url(../pics/ycar.JPG); 
 background-size: cover;
 background-position-y: center;
 }
-.cards .yellow { background-image: url(../oldblue.JPG);
+.cards .yellow { background-image: url(../pics/oldblue.JPG);
 background-size: cover;
 background-position-y: center; }
-.cards .teal { background-image: url(../mar.JPG);
+.cards .teal { background-image: url(../pics/mar.JPG);
 background-size: cover;
 background-position-y: center; }
-.cards .magenta { background-image: url(../marback.JPG);
+.cards .magenta { background-image: url(../pics/marback.JPG);
 background-size: cover; 
 background-position-y: center;}
-.cards .zed { background-image: url(../marfront.JPG); 
+.cards .zed { background-image: url(../pics/marfront.JPG); 
 background-size: cover;
 background-position-y: 65%;
 background-position-x: 10%;
 }
 .cards .a7mr{
-    background-image: url(../idk.JPG);
+    background-image: url(../pics/idk.JPG);
     background-size: cover;
     background-position-y: center;
 }
 .cards .a5dr{
-    background-image: url(../porsche.JPEG);
+    background-image: url(../pics/porsche.JPEG);
     background-size: cover;
 }
 .cards .psrt{
-    background-image: url(../srt.JPEG);
+    background-image: url(../pics/srt.JPEG);
     background-size: cover;
 }
 .cards .bmwb{
-    background-image: url(../bmwb.JPG);
+    background-image: url(../pics/bmwb.JPG);
     background-size: cover;
 }
 .cards .wporsche{
-    background-image: url(../wporsche.JPG);
+    background-image: url(../pics/wporsche.JPG);
     background-size: cover;
 }
 .cards .redsrt{
-    background-image: url(../rsrt.JPG);
+    background-image: url(../pics/rsrt.JPG);
     background-size: cover;
 }
 .cards .yellcar{
-    background-image: url(../corvette.JPG);
+    background-image: url(../pics/corvette.JPG);
     background-size: cover;
 }
 .cards .salbike{
-    background-image: url(../salem.JPG);
+    background-image: url(../pics/salem.JPG);
     background-size: cover;
     background-position-y: center;
 }
 .cards .wchall{
-    background-image: url(../wchallenger.JPG);
+    background-image: url(../pics/wchallenger.JPG);
     background-size: cover;
 }
 .cards .wchalle{
-    background-image: url(../oldwcar.jpg);
+    background-image: url(../pics/oldwcar.jpg);
     background-size: cover;
 }
 .cards .bporsche{
-    background-image: url(../bprosche.JPEG);
+    background-image: url(../pics/bprosche.JPEG);
     background-size: cover;
 }
 .cards .blambo{
-    background-image: url(../lambo.JPEG);
+    background-image: url(../pics/lambo.JPEG);
     background-size: cover;
 }
 .cards .last{
-    background-image: url(../challenge.JPG);
+    background-image: url(../pics/challenge.JPG);
     background-size: cover;
 }
 .cards .card p.tip {

@@ -14,7 +14,7 @@ body {
 .banner {
     width: 100%;
     height: auto;
-    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../background.JPEG);
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../pics//background.JPEG);
     background-size: auto;
     background-position: center;
     padding-bottom: 100%; /* Add some padding to the bottom */
@@ -98,17 +98,17 @@ body {
   }
   
   .cards .red {
-    background-image: url(../carclear.jpg);
+    background-image: url(../pics//carclear.jpg);
     background-size: cover;
   }
   
   .cards .blue {
-    background-image: url(../city.jpg);
+    background-image: url(../pics//city.jpg);
     background-size: cover;
   }
   
   .cards .green {
-    background-image: url(../portrait.jpg);
+    background-image: url(../pics//portrait.jpg);
     background-size: cover;
   }
   

@@ -13,7 +13,7 @@ body {
 .banner {
   width: 100%;
   height: auto;
-  background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../background.JPEG);
+  background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../pics//background.JPEG);
   background-size: cover;
   background-position: center;
 }
