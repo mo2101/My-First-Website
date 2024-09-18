@@ -17,13 +17,14 @@ body {
     background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../pics//background.JPEG);
     background-size: auto;
     background-position: center;
-    padding-bottom: 100%; /* Add some padding to the bottom */
+    padding-bottom: 500px; /* Add some padding to the bottom */
 }
 
 .navbar {
   width: 85%;
   margin: auto;
-  padding: 5%;
+  padding: 20px;
+  padding-top: 40px;
   display: flex;
   justify-content: space-between;
   height: 200px;
