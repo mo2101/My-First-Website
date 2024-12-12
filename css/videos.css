@@ -1,41 +1,52 @@
 *{
-    margin: 0px;
+    margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
- .banner{
+
+/* Banner styling */
+.banner {
     width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(../pics/background.JPEG);
-    background-size: cover;
+    background-size: cover; /* Ensures the background covers the whole area */
     background-position: center;
-}
- .navbar{
-    width: 85%;
-    margin: auto;
-    padding: 30px 0;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
- .signature{
-    width: 150px;
+
+.navbar {
+    width: 85%;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.signature {
+    width: 150px; /* Smaller for responsiveness */
     cursor: pointer;
 }
- .navbar ul li{
-    list-style: none;
+
+
+.navbar ul li {
     display: inline-block;
     margin: 0 20px;
     position: relative;
-    margin-bottom: 10px;
+    list-style: none;
 }
-.navbar ul li a{
+
+.navbar ul li a {
     text-decoration: none;
     color: #fff;
     text-transform: uppercase;
-    margin-bottom: 20px;
 }
-.navbar ul li::after{
+
+.navbar ul li::after {
     content: '';
     height: 3px;
     width: 0;
@@ -45,23 +56,37 @@
     bottom: 0;
     transition: 0.4s;
 }
-.navbar ul li:hover:after{
+
+.navbar ul li:hover::after {
     width: 100%;
 }
-.content{
+/* Content styling */
+.content {
     width: 100%;
-    position: static;
+    flex-direction: row;
     top: 35%;
-    transform: translateY(-50%);
     text-align: center;
     color: #fff;
+    justify-content: center;
+    align-items: center;
 }
-.content h1{
-    font-size: 70px;
-    margin-top: 60px;
+
+.content h1 {
+    font-size: 50px;
+    margin-top: 50px;
 }
 .content p{
     margin: 5px auto;
     font-weight: 100;
     line-height: 50px;
+}
+.content video{
+    align-items: center;
+    position: relative;
+    width: 720px;
+    height: 480px;
+    align-items: center;
+    justify-content: center;
+
+
 }

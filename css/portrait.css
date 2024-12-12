@@ -31,12 +31,12 @@
   
   .navbar {
     width: 85%;
-  margin: auto;
-  padding: 40px;
-  padding-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  height: 200px;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .signature {

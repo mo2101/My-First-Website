@@ -19,12 +19,12 @@
 
 .navbar {
     width: 85%;
-    margin: auto;
-    padding: 10px ;
-    padding-top: 50px;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 50px;
     display: flex;
     justify-content: space-between;
-    height: 180px;
+    align-items: center;
 }
 
 .signature {
