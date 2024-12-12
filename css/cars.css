@@ -1,10 +1,10 @@
-* {
+*{
     margin: 0;
-  margin-top: 0;
-  padding: 0;
-  font-family: sans-serif;
+    padding: 0;
+    font-family: sans-serif;
 }
 
+/* Banner styling */
 .banner {
     width: 100%;
     min-height: 100vh; /* Ensures banner always takes full height of viewport */
@@ -17,6 +17,7 @@
     align-items: center;
 }
 
+/* Navbar styling */
 .navbar {
     width: 85%;
     margin-top: 10px;
@@ -25,22 +26,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .signature {
-    width: 200px;
+    width: 150px; /* Smaller for responsiveness */
     cursor: pointer;
 }
 
-.navbar ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
 
 .navbar ul li {
+    display: inline-block;
+    margin: 0 20px;
     position: relative;
-    height: 20px;
+    list-style: none;
 }
 
 .navbar ul li a {
@@ -56,13 +55,14 @@
     background: #f06553;
     position: absolute;
     left: 0;
-    bottom: -5px; /* Adjust position as needed */
-    transition: width 0.4s;
+    bottom: 0;
+    transition: 0.4s;
 }
 
 .navbar ul li:hover::after {
     width: 100%;
 }
+
 
 .contentone {
     width: 100%;
