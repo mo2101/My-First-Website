@@ -114,9 +114,11 @@
   background-size: cover;
   background-position-y: center;
   }
-  .cards .yellow { background-image: url(../pics/portrait/por\ \(8\).jpg);
-  background-size: cover;
-  background-position: center; }
+  .cards .yellow {
+    background-image: url(../pics/portrait/por\ \(8\).jpg);
+    background-size: cover;
+    background-position: center;
+  }
   .cards .teal { background-image: url(../pics/portrait/por\ \(33\).JPG);
   background-size: cover;
   background-position: center right 40%; }
