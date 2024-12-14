@@ -101,158 +101,174 @@
   transition: transform 400ms ease;
 }
 
-.cards .red { background-image: url(../pics/city2/cityy\ \(1\).jpg);
+.cards .red { background-image: url(../pics/city2/city1.jpg);
 background-position-x: right;
 background-position-y: center;
 background-size: 100%;
 }
-.cards .blue { background-image: url(../pics/city2/cityy\ \(2\).jpg);
+.cards .blue { background-image: url(../pics/city2/city2.jpg);
 background-size: cover;
 background-position: center right 30%; }
-.cards .green { background-image: url(../pics/city2/cityy\ \(3\).jpg); 
+.cards .green { background-image: url(../pics/city2/city3.jpg); 
 background-size: cover;
 background-position-y: center;
 }
-.cards .yellow { background-image: url(../pics/city2/cityy\ \(4\).jpg);
+.cards .yellow { background-image: url(../pics/city2/city4.jpg);
 background-size: cover;
 background-position-y: center; }
-.cards .teal { background-image: url(../pics/city2/cityy\ \(17\).jpg);
+.cards .teal { background-image: url(../pics/city2/city5.jpg);
 background-size: cover;
 background-position: center right 75%; }
-.cards .magenta { background-image: url(../pics/city2/cityy\ \(6\).jpg);
+.cards .magenta { background-image: url(../pics/city2/city6.jpg);
 background-size: cover; 
 background-position-y: center;}
-.cards .zed { background-image: url(../pics/city2/cityy\ \(7\).jpg); 
+.cards .zed { background-image: url(../pics/city2/city7.jpg); 
 background-size: cover;
 background-position-y: 65%;
 background-position-x: 10%;
 }
 .cards .a7mr{
-  background-image: url(../pics/city2/cityy\ \(8\).jpg);
+  background-image: url(../pics/city2/city8.jpg);
   background-size: cover;
   background-position-y: center;
 }
 .cards .a5dr{
-  background-image: url(../pics/city2/cityy\ \(9\).jpg);
+  background-image: url(../pics/city2/city9.jpg);
   background-size: cover;
 }
 .cards .psrt{
-  background-image: url(../pics/city2/cityy\ \(10\).jpg);
+  background-image: url(../pics/city2/city10.jpg);
   background-size: cover;
 }
 .cards .bmwb{
-  background-image: url(../pics/city2/cityy\ \(11\).jpg);
+  background-image: url(../pics/city2/city11.jpg);
   background-size: cover;
   background-position: center;
 }
 .cards .wporsche{
-  background-image: url(../pics/city2/cityy\ \(12\).jpg);
+  background-image: url(../pics/city2/city12.jpg);
   background-size: cover;
   background-position: center right 5%;
 }
 .cards .redsrt{
-  background-image: url(../pics/city2/cityy\ \(13\).jpg);
+  background-image: url(../pics/city2/city13.jpg);
   background-size: cover;
   background-position: center right 5%;
 }
 .cards .yellcar{
-  background-image: url(../pics/city2/cityy\ \(14\).jpg);
+  background-image: url(../pics/city2/city14.jpg);
   background-size: cover;
   background-position: center;
 }
 .cards .salbike{
-  background-image: url(../pics/city2/cityy\ \(15\).jpg);
+  background-image: url(../pics/city2/city15.JPG);
   background-size: cover;
   background-position-y: center;
 }
 .cards .wchall{
-  background-image: url(../pics/city2/cityy\ \(16\).jpg);
+  background-image: url(../pics/city2/city16.JPG);
   background-size: cover;
   background-position: center right 30%;
 }
 .cards .wchalle{
-  background-image: url(../pics/city2/cityy\ \(5\).jpg);
+  background-image: url(../pics/city2/city17.JPG);
   background-size: cover;
   background-position: center right 40%;
 }
 .cards .bporsche{
-  background-image: url(../pics/city2/cityy\ \(18\).jpg);
+  background-image: url(../pics/city2/city18.jpg);
   background-size: cover;
   background-position: center right 75%;
 }
 .cards .blambo{
-  background-image: url(../pics/city2/cityy\ \(19\).jpg);
+  background-image: url(../pics/city2/city19.jpg);
   background-size: cover;
 }
 .cards .last{
-  background-image: url(../pics/city2/cityy\ \(20\).jpg);
+  background-image: url(../pics/city2/city20.jpg);
   background-size: cover;
 }
 .cards .one{
-  background-image: url(../pics/city2/cityy\ \(21\).jpg);
+  background-image: url(../pics/city2/city21.JPG);
   background-size: cover;
   background-position: center;
 }.cards .two{
-  background-image: url(../pics/city2/cityy\ \(22\).jpg);
+  background-image: url(../pics/city2/city22.JPG);
   background-size: cover;
 }.cards .three{
-  background-image: url(../pics/city2/cityy\ \(23\).jpg);
+  background-image: url(../pics/city2/city23.JPG);
   background-size: cover;
 }.cards .four{
-  background-image: url(../pics/city2/cityy\ \(24\).jpg);
+  background-image: url(../pics/city2/city24.JPG);
   background-size: cover;
 }.cards .five{
-  background-image: url(../pics/city2/cityy\ \(25\).jpg);
+  background-image: url(../pics/city2/city25.JPG);
   background-size: cover;
 }.cards .six{
-  background-image: url(../pics/city2/cityy\ \(26\).jpg);
+  background-image: url(../pics/city2/city26.jpg);
   background-size: cover;
 }.cards .seven{
-  background-image: url(../pics/city2/cityy\ \(27\).jpg);
+  background-image: url(../pics/city2/city27.jpg);
   background-size: cover;
 }.cards .nine{
-  background-image: url(../pics/city2/cityy\ \(29\).jpg);
+  background-image: url(../pics/city2/city28.jpg);
   background-size: cover;
 }.cards .eleven{
-  background-image: url(../pics/city2/cityy\ \(31\).jpg);
+  background-image: url(../pics/city2/city29.jpg);
   background-size: cover;
 }.cards .twelve{
-  background-image: url(../pics/city2/cityy\ \(32\).jpg);
+  background-image: url(../pics/city2/city30.jpg);
   background-size: cover;
   background-position: center;
 }.cards .thirteen{
-  background-image: url(../pics/city2/cityy\ \(33\).jpg);
+  background-image: url(../pics/city2/city31.JPG);
   background-size: cover;
 }.cards .fourteen{
-  background-image: url(../pics/city2/cityy\ \(34\).jpg);
+  background-image: url(../pics/city2/city32.jpg);
   background-size: cover;
 }.cards .fifteen{
-  background-image: url(../pics/city2/cityy\ \(35\).jpg);
+  background-image: url(../pics/city2/city33.JPG);
   background-size: cover;
 }.cards .sixteen{
-  background-image: url(../pics/city2/cityy\ \(36\).jpg);
+  background-image: url(../pics/city2/city34.jpg);
   background-size: cover;
 }.cards .eighteen{
-  background-image: url(../pics/city2/cityy\ \(38\).jpg);
+  background-image: url(../pics/city2/city35.jpg);
   background-size: cover;
 }.cards .nineteen{
-  background-image: url(../pics/city2/cityy\ \(39\).jpg);
+  background-image: url(../pics/city2/city36.jpg);
   background-size: cover;
 }.cards .twenty{
-  background-image: url(../pics/city2/cityy\ \(40\).jpg);
+  background-image: url(../pics/city2/city37.jpg);
   background-size: cover;
 }
 .cards .tone{
-  background-image: url(../pics/city2/cityy\ \(41\).jpg);
+  background-image: url(../pics/city2/city38.jpg);
   background-size: cover;
 }
 
 .cards .tfour{
-  background-image: url(../pics/city2/cityy\ \(44\).jpg);
+  background-image: url(../pics/city2/city39.jpg);
   background-size: cover;
 }
 .cards .tfive{
-  background-image: url(../pics/city2/cityy\ \(45\).jpg);
+  background-image: url(../pics/city2/city40.jpg);
+  background-size: cover;
+}
+.cards .hello{
+  background-image: url(../pics/city2/city41.jpg);
+  background-size: cover;
+}
+.cards .other{
+  background-image: url(../pics/city2/city44.jpg);
+  background-size: cover;
+}
+.cards .side{
+  background-image: url(../pics/city2/city45.jpg);
+  background-size: cover;
+}
+.cards .adele{
+  background-image: url(../pics/city2/city46.jpg);
   background-size: cover;
 }
 .cards .card p.tip {
