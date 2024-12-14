@@ -7,10 +7,10 @@
 /* Banner styling */
 .banner {
   width: 100%;
-  min-height: 100vh; /* Ensures banner always takes full height of viewport */
+  height: 100%; /* Ensures banner always takes full height of viewport */
   background-size: cover; /* Ensures the background covers the whole area */
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);
   display: flex;
   flex-direction: column;
@@ -84,6 +84,7 @@
     width: 90%;
     margin: 0 auto; /* Center the cards container */
     justify-content: center;
+    margin-bottom: 200px;
   }
   
   .card {
