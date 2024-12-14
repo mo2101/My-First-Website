@@ -101,224 +101,226 @@
     cursor: pointer;
     transition: transform 400ms ease;
   }
-  .cards .red{background-image: url(../pics/portrait/por\ \(31\).JPG);
+  .cards .one{background-image: url(../pics/portrait/moe.JPG);
     background-position-x: right;
     background-position-y: center;
     background-size: 100%;
     }
-    .cards .blue{ background-image: url(../pics/portrait/por\ \(37\).jpg);
+    .cards .two{ background-image: url(../pics/portrait/moe2.jpg);
     background-size: cover;
     background-position: center; }
-    .cards .green{ background-image: url(../pics/portrait/por\ \(18\).jpg); 
+    .cards .three{ background-image: url(../pics/portrait/moe3.JPG); 
     background-size: cover;
     background-position-y: center;
     }
-    .cards .yellow{
-      background-image: url(../pics/portrait/por\ \(8\).jpg);
+    .cards .four{
+      background-image: url(../pics/portrait/moe4.JPG);
       background-size: cover;
       background-position: center;
     }
-    .cards .teal{ background-image: url(../pics/portrait/por\ \(33\).JPG);
+    .cards .five{ background-image: url(../pics/portrait/tim.jpg);
     background-size: cover;
     background-position: center right 40%; }
-    .cards .magenta { background-image: url(../pics/portrait/moe.JPG);
+    .cards .six{ background-image: url(../pics/portrait/me.jpg);
     background-size: cover; 
     background-position-y: center;}
-    .cards .zed{ background-image: url(../pics/portrait/por\ \(32\).JPG); 
+    .cards .seven{ background-image: url(../pics/portrait/tim2.jpg); 
     background-size: cover;
     background-position-y: 65%;
     background-position-x: 10%;
     }
-    .cards .a7mr{
-      background-image: url(../pics/portrait/por\ \(7\).jpg);
+    .cards .eight{
+      background-image: url(../pics/portrait/me2.jpeg);
       background-size: cover;
       background-position-y: center;
     }
-    .cards .a5dr{
-      background-image: url(../pics/portrait/por\ \(3\).jpg);
+    .cards .nine{
+      background-image: url(../pics/portrait/sunset.jpg);
       background-size: cover;
       background-position: center right 48%;
     }
-    .cards .psrt{
-      background-image: url(../pics/portrait/por\ \(17\).jpg);
+    .cards .ten{
+      background-image: url(../pics/portrait/sunset2.jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .bmwb{
-      background-image: url(../pics/portrait/por\ \(10\).jpg);
+    .cards .eleven{
+      background-image: url(../pics/portrait/sunset4.JPG);
       background-size: cover;
       background-position: center;
     }
-    .cards .wporsche{
-      background-image: url(../pics/portrait/por\ \(11\).jpg);
+    .cards .twelve{
+      background-image: url(../pics/portrait/sunset3.JPG);
       background-size: cover;
       background-position: center right 5%;
     }
-    .cards .redsrt{
-      background-image: url(../pics/portrait/por\ \(12\).jpg);
+    .cards .thirteen{
+      background-image: url(../pics/portrait/forest.jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .yellcar{
-      background-image: url(../pics/portrait/por\ \(13\).jpg);
+    .cards .fourteen{
+      background-image: url(../pics/portrait/forest2.JPG);
       background-size: cover;
       background-position: center right 11%;
     }
-    .cards .salbike{
-      background-image: url(../pics/portrait/por\ \(9\).jpg);
+    .cards .fifteen{
+      background-image: url(../pics/portrait/forest3.JPG);
       background-size: cover;
       background-position: center;
     }
-    .cards .wchall{
-      background-image: url(../pics/portrait/por\ \(44\).jpg);
+    .cards .seventeen{
+      background-image: url(../pics/portrait/forest4.jpg);
       background-size: cover;
       background-position: center right 25%;
     }
-    .cards .wchalle{
-      background-image: url(../pics/portrait/por\ \(16\).jpg);
+    .cards .eighteen{
+      background-image: url(../pics/portrait/ahmad.jpg);
       background-size: cover;
       background-position: center right 40%;
     }
-    .cards .bporsche{
-      background-image: url(../pics/portrait/por\ \(34\).jpg);
+    .cards .nineteen{
+      background-image: url(../pics/portrait/ahmad1.jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .blambo{
-      background-image: url(../pics/portrait/por\ \(34\).jpg);
+    .cards .twenty{
+      background-image: url(../pics/portrait/ahmad2.JPG);
       background-size: cover;
     }
-    .cards .last{
-      background-image: url(../pics/portrait/por\ \(26\).jpg);
+    .cards .twentyone{
+      background-image: url(../pics/portrait/ahmad3.jpg);
       background-size: cover;
     }
-    .cards .one{
-      background-image: url(../pics/portrait/por\ \(20\).jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .two{
-      background-image: url(../pics/portrait/por\ \(21\).jpg);
+    .cards .twentytwo{
+      background-image: url(../pics/portrait/shim.jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .three{
-      background-image: url(../pics/portrait/por\ \(22\).jpg);
+    .cards .twentythree{
+      background-image: url(../pics/portrait/shim1.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+    .cards .twentyfour{
+      background-image: url(../pics/portrait/shim2.jpg);
       background-size: cover;
     }
-    .cards .four{
-      background-image: url(../pics/portrait/por\ \(27\).jpg);
+    .cards .twentyfive{
+      background-image: url(../pics/portrait/smi3.JPG);
       background-size: cover;
     }
-    .cards .five{
-      background-image: url(../pics/portrait/por\ \(36\).jpg);
+    .cards .twentysix{
+      background-image: url(../pics/portrait/sedo.jpg);
       background-size: cover;
       background-position: center right 60%;
     }
-    .cards .six{
-      background-image: url(../pics/portrait/por\ \(25\).jpg);
+    .cards .twentyseven{
+      background-image: url(../pics/portrait/sedo1.JPG);
       background-size: cover;
     }
-    .cards .seven{
-      background-image: url(../pics/portrait/por\ \(41\).jpg);
+    .cards .twentyeight{
+      background-image: url(../pics/portrait/sedo2.jpg);
       background-size: cover;
       background-position: center right 65%;
     }
-    .cards .nine{
-      background-image: url(../pics/portrait/por\ \(19\).jpg);
+    .cards .twentynine{
+      background-image: url(../pics/portrait/sedo3.jpg);
       background-size: cover;
     }
-    .cards .eleven{
-      background-image: url(../pics/portrait/por\ \(23\).jpg);
+    .cards .thirty{
+      background-image: url(../pics/portrait/jourie.jpg);
       background-size: cover;
       
     }
-    .cards .twelve{
-      background-image: url(../pics/portrait/por\ \(29\).jpg);
+    .cards .thirtyone{
+      background-image: url(../pics/portrait/jourie1.JPG);
       background-size: 120%;
       background-position: center;
     }
-    .cards .thirteen{
-      background-image: url(../pics/portrait/por\ \(30\).jpg);
+    .cards .thirtytwo{
+      background-image: url(../pics/portrait/jourie2.jpg);
       background-size: cover;
     }
-    .cards .fourteen{
-      background-image: url(../pics/portrait/por.jpeg);
+    .cards .thirtythree{
+      background-image: url(../pics/portrait/jourie3.jpeg);
       background-size: cover;}
-  .cards .fifteen{
-      background-image: url(../pics/portrait/por\ \(6\).jpg);
+  .cards .thirtyfour{
+      background-image: url(../pics/portrait/hi.jpg);
       background-size: cover;
       background-position: center;
     }
     
-    .cards .sixteen{
-      background-image: url(../pics/portrait/por\ \(4\).jpg);
+    .cards .thirtyfive{
+      background-image: url(../pics/portrait/hi1.JPG);
       background-size: cover;
     }
-    .cards .eighteen{
-      background-image: url(../pics/portrait/por\ \(14\).jpg);
+    .cards .thirtysix{
+      background-image: url(../pics/portrait/hi2.jpeg);
       background-size: cover;
       background-position: center;
     }
-    .cards .nineteen{
-      background-image: url(../pics/portrait/por\ \(2\).jpeg);
+    .cards .thirtyseven{
+      background-image: url(../pics/portrait/hi3.JPG);
       background-size: cover;
     }
-    .cards .twenty{
-      background-image: url(../pics/portrait/por\ \(35\).jpg);
+    .cards .thirtyeight{
+      background-image: url(../pics/portrait/hag.jpg);
       background-size: cover;
     }
-    .cards .tone{
-      background-image: url(../pics/portrait/por\ \(1\).jpg);
+    .cards .thirtynine{
+      background-image: url(../pics/portrait/hag1.jpg);
       background-size: cover;
     }
     
-    .cards .tfour{
-      background-image: url(../pics/portrait/por\ \(2\).jpg);
+    .cards .fourty{
+      background-image: url(../pics/portrait/hag2.jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .tfive{
-      background-image: url(../pics/portrait/por\ \(45\).jpg);
+    .cards .fourtyone{
+      background-image: url(../pics/portrait/hag3.JPG);
       background-size: cover;
+      background-position: center right 51%;
     }
-    .cards .tsix{
+    .cards .fourtytwo{
         background-image: url(../pics/portrait/por\ \(40\).jpg);
         background-size: cover;
         background-position: center;
-      }.cards .tseven{
+      }.cards .fourtythree{
       background-image: url(../pics/portrait/por\ \(28\).jpg);
       background-size: cover;
       background-position: center right 51%;
     }
-    .cards .teight{
+    .cards .fourtyfive{
       background-image: url(../pics/portrait/por\ \(42\).jpg);
       background-size: cover;
       background-position: center;
     }
     
-    .cards .tnine{
+    .cards .fourtysix{
       background-image: url(../pics/portrait/por\ \(43\).jpg);
       background-size: cover;
       background-position: center;
     }
-    .cards .therty{
-      background-image: url(../pics/portrait/por\ \(15\).jpg);
+    .cards .fourtyseven{
+      background-image: url(../pics/portrait/last.jpg);
+      background-size: cover;
+      background-position: center right 9%;
+    }
+  .cards .fourtyeight{
+      background-image: url(../pics/portrait/last1.jpg);
       background-size: cover;
       background-position: center;
-    }
-  .cards .thone{
-      background-image: url(../pics/portrait/por\ \(39\).jpg);
-      background-size: cover;
-      background-position: right 15%;
-    }.cards .thtwo{
-      background-image: url(../pics/portrait/por\ \(24\).jpg);
+    }.cards .fourtynine{
+      background-image: url(../pics/portrait/last2.JPG);
       background-size: cover;
       background-position-y: bottom;
     }
-    .cards .ththree{
-      background-image: url(../pics/portrait/por\ \(3\).jpeg);
+    .cards .fifty{
+      background-image: url(../pics/portrait/last3.JPG);
       background-size: cover;
+      background-position: center;
     }
     
     .cards .card p.tip {
