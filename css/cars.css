@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 /* Navbar styling */
@@ -108,6 +109,8 @@
 background-position-x: right;
 background-position-y: center;
 background-size: 100%;
+border-radius: 10px;
+height: 350px;
 }
 .cards .blue { background-image: url(../pics/challengerblue.JPG);
 background-size: cover;

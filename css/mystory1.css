@@ -3,21 +3,25 @@
     padding: 0;
     font-family: sans-serif;
 }
-
-/* Banner styling */
-.banner {
-    width: 100%;
-    min-height: 100vh; /* Ensures banner always takes full height of viewport */
+.parent{
     background-size: cover; /* Ensures the background covers the whole area */
     background-position: center;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);
+    position: relative;
+    width: 100%;
+    height: 700px;
+}
+
+/* Banner styling */
+.banner {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 0px;
     padding-bottom: 0px;
-    position: absolute;
+    position: static;
 }
 
 /* Navbar styling */
@@ -70,7 +74,7 @@
 /* Content styling */
 .content {
     width: 100%;
-    position: absolute;
+    position: static;
     top: 35%;
     text-align: center;
     color: #fff;
@@ -79,31 +83,26 @@
 .content h1 {
     font-size: 50px;
     margin-top: 0px;
-    margin-bottom: 20px;
-}
-
-.content p {
-    margin: 20px auto;
-    font-weight: 100;
-    line-height: 50px;
-    align-content: flex-start;
+    margin-bottom: 50px;
 }
 .bodyfor{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: absolute;
+    position: static;
     bottom: 60px;
     justify-content: space-around;
 
 }
 .bodyfor p {
-    align-items: flex-start;
+    align-items: flex-stacrt;
     text-align: center;
     left: 10px;
     color: #fff;
     font-family: 'Times New Roman', Times, serif;
     width: 50%;
+    font-size: 25px;
+    justify-content: center;
 }
 .img.why{
     display: flex;
