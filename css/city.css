@@ -7,10 +7,10 @@
 /* Banner styling */
 .banner {
   width: 100%;
-  min-height: 100vh; /* Ensures banner always takes full height of viewport */
+  height: 100%; /* Ensures banner always takes full height of viewport */
   background-size: cover; /* Ensures the background covers the whole area */
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);
   display: flex;
   flex-direction: column;
@@ -74,6 +74,7 @@
 .contentone h1 {
   font-size: 100px;
   margin: 10px 0;
+  padding: auto;
 }
 
 .cards {
@@ -81,214 +82,60 @@
   flex-wrap: wrap;
   gap: 15px;
   width: 90%;
-  margin: 0 auto; /* Center the cards container */
+  margin: 0 auto;
   justify-content: center;
+  margin-bottom: 200px;
 }
 
 .card {
-  flex: 1 1 calc(33.333% - 30px); /* Responsive width */
+  flex: 1 1 calc(33.333% - 30px);
   min-width: 200px;
   max-width: 300px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
   height: 350px;
   border-radius: 10px;
-  color: rgb(207, 177, 4);
   cursor: pointer;
   transition: transform 400ms ease;
-}
-
-.cards .red { background-image: url(../pics/city2/city1.jpg);
-background-position-x: right;
-background-position-y: center;
-background-size: 100%;
-}
-.cards .blue { background-image: url(../pics/city2/city2.jpg);
-background-size: cover;
-background-position: center right 30%; }
-.cards .green { background-image: url(../pics/city2/city3.jpg); 
-background-size: cover;
-background-position-y: center;
-}
-.cards .yellow { background-image: url(../pics/city2/city4.jpg);
-background-size: cover;
-background-position-y: center; }
-.cards .teal { background-image: url(../pics/city2/city5.jpg);
-background-size: cover;
-background-position: center right 75%; }
-.cards .magenta { background-image: url(../pics/city2/city6.jpg);
-background-size: cover; 
-background-position-y: center;}
-.cards .zed { background-image: url(../pics/city2/city7.jpg); 
-background-size: cover;
-background-position-y: 65%;
-background-position-x: 10%;
-}
-.cards .a7mr{
-  background-image: url(../pics/city2/city8.jpg);
-  background-size: cover;
-  background-position-y: center;
-}
-.cards .a5dr{
-  background-image: url(../pics/city2/city9.jpg);
-  background-size: cover;
-}
-.cards .psrt{
-  background-image: url(../pics/city2/city10.jpg);
-  background-size: cover;
-}
-.cards .bmwb{
-  background-image: url(../pics/city2/city11.jpg);
   background-size: cover;
   background-position: center;
-}
-.cards .wporsche{
-  background-image: url(../pics/city2/city12.jpg);
-  background-size: cover;
-  background-position: center right 5%;
-}
-.cards .redsrt{
-  background-image: url(../pics/city2/city13.jpg);
-  background-size: cover;
-  background-position: center right 5%;
-}
-.cards .yellcar{
-  background-image: url(../pics/city2/city14.jpg);
-  background-size: cover;
-  background-position: center;
-}
-.cards .salbike{
-  background-image: url(../pics/city2/city15.JPG);
-  background-size: cover;
-  background-position-y: center;
-}
-.cards .wchall{
-  background-image: url(../pics/city2/city16.JPG);
-  background-size: cover;
-  background-position: center right 30%;
-}
-.cards .wchalle{
-  background-image: url(../pics/city2/city17.JPG);
-  background-size: cover;
-  background-position: center right 40%;
-}
-.cards .bporsche{
-  background-image: url(../pics/city2/city18.jpg);
-  background-size: cover;
-  background-position: center right 75%;
-}
-.cards .blambo{
-  background-image: url(../pics/city2/city19.jpg);
-  background-size: cover;
-}
-.cards .last{
-  background-image: url(../pics/city2/city20.jpg);
-  background-size: cover;
-}
-.cards .one{
-  background-image: url(../pics/city2/city21.JPG);
-  background-size: cover;
-  background-position: center;
-}.cards .two{
-  background-image: url(../pics/city2/city22.JPG);
-  background-size: cover;
-}.cards .three{
-  background-image: url(../pics/city2/city23.JPG);
-  background-size: cover;
-}.cards .four{
-  background-image: url(../pics/city2/city24.JPG);
-  background-size: cover;
-}.cards .five{
-  background-image: url(../pics/city2/city25.JPG);
-  background-size: cover;
-}.cards .six{
-  background-image: url(../pics/city2/city26.jpg);
-  background-size: cover;
-}.cards .seven{
-  background-image: url(../pics/city2/city27.jpg);
-  background-size: cover;
-}.cards .nine{
-  background-image: url(../pics/city2/city28.jpg);
-  background-size: cover;
-}.cards .eleven{
-  background-image: url(../pics/city2/city29.jpg);
-  background-size: cover;
-}.cards .twelve{
-  background-image: url(../pics/city2/city30.jpg);
-  background-size: cover;
-  background-position: center;
-}.cards .thirteen{
-  background-image: url(../pics/city2/city31.JPG);
-  background-size: cover;
-}.cards .fourteen{
-  background-image: url(../pics/city2/city32.jpg);
-  background-size: cover;
-}.cards .fifteen{
-  background-image: url(../pics/city2/city33.JPG);
-  background-size: cover;
-}.cards .sixteen{
-  background-image: url(../pics/city2/city34.jpg);
-  background-size: cover;
-}.cards .eighteen{
-  background-image: url(../pics/city2/city35.jpg);
-  background-size: cover;
-}.cards .nineteen{
-  background-image: url(../pics/city2/city36.jpg);
-  background-size: cover;
-}.cards .twenty{
-  background-image: url(../pics/city2/city37.jpg);
-  background-size: cover;
-}
-.cards .tone{
-  background-image: url(../pics/city2/city38.jpg);
-  background-size: cover;
+  position: relative; /* Required for caption positioning */
+  z-index: 1;
 }
 
-.cards .tfour{
-  background-image: url(../pics/city2/city39.jpg);
-  background-size: cover;
-}
-.cards .tfive{
-  background-image: url(../pics/city2/city40.jpg);
-  background-size: cover;
-}
-.cards .hello{
-  background-image: url(../pics/city2/city41.jpg);
-  background-size: cover;
-}
-.cards .other{
-  background-image: url(../pics/city2/city44.jpg);
-  background-size: cover;
-}
-.cards .side{
-  background-image: url(../pics/city2/city45.jpg);
-  background-size: cover;
-}
-.cards .adele{
-  background-image: url(../pics/city2/city46.jpg);
-  background-size: cover;
-}
-.cards .card p.tip {
-  font-size: 1em;
-  font-weight: 700;
-}
-
-.cards .card p.second-text {
-  font-size: 0.7em;
-}
-
-.cards .card:hover {
+/* Hover zoom effect */
+.card:hover {
   transform: scale(2);
   z-index: 2;
-  position: relative;
 }
 
+/* Blur effect on non-hovered cards */
 .cards:hover > .card:not(:hover) {
   filter: blur(0px);
   transform: scale(0.9);
+}
+
+/* Caption on hover from data-caption */
+.card::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {

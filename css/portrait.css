@@ -62,284 +62,84 @@
 .navbar ul li:hover::after {
   width: 100%;
 }
-
-  .contentone {
+.contentone {
     width: 100%;
     text-align: center;
     margin: auto; /* Center vertically */
     color: #fff;
     font-size: 250%;
     margin-bottom: 15px;
-  }
-  
-  .contentone h1 {
+}
+
+.contentone h1 {
     font-size: 100px;
-    margin: 20px 0;
-  }
-  
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 90%;
-    margin: 0 auto; /* Center the cards container */
-    justify-content: center;
-    margin-bottom: 200px;
-  }
-  
+    margin: 10px 0;
+    padding: auto;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  margin-bottom: 200px;
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 30px);
+  min-width: 200px;
+  max-width: 300px;
+  height: 350px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Zoom on hover */
+.card:hover {
+  transform: scale(2);
+  z-index: 2;
+}
+
+/* Blur other cards */
+.cards:hover > .card:not(:hover) {
+  filter: blur(2px);
+  transform: scale(0.9);
+}
+
+/* Hover text from data-caption */
+.card::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* Responsive fallback for mobile */
+@media (max-width: 768px) {
   .card {
-    flex: 1 1 calc(33.333% - 30px); /* Responsive width */
-    min-width: 200px;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 350px;
-    border-radius: 10px;
-    color: rgb(207, 177, 4);
-    cursor: pointer;
-    transition: transform 400ms ease;
+    flex: 1 1 100%;
   }
-  .cards .one{background-image: url(../pics/portrait/moe.JPG);
-    background-position-x: right;
-    background-position-y: center;
-    background-size: 100%;
-    }
-    .cards .two{ background-image: url(../pics/portrait/moe2.jpg);
-    background-size: cover;
-    background-position: center; }
-    .cards .three{ background-image: url(../pics/portrait/moe3.JPG); 
-    background-size: cover;
-    background-position-y: center;
-    }
-    .cards .four{
-      background-image: url(../pics/portrait/moe4.JPG);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .five{ background-image: url(../pics/portrait/tim.jpg);
-    background-size: cover;
-    background-position: center right 40%; }
-    .cards .six{ background-image: url(../pics/portrait/me.jpg);
-    background-size: cover; 
-    background-position-y: center;}
-    .cards .seven{ background-image: url(../pics/portrait/tim2.jpg); 
-    background-size: cover;
-    background-position-y: 65%;
-    background-position-x: 10%;
-    }
-    .cards .eight{
-      background-image: url(../pics/portrait/me2.jpeg);
-      background-size: cover;
-      background-position-y: center;
-    }
-    .cards .nine{
-      background-image: url(../pics/portrait/sunset.jpg);
-      background-size: cover;
-      background-position: center right 48%;
-    }
-    .cards .ten{
-      background-image: url(../pics/portrait/sunset2.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .eleven{
-      background-image: url(../pics/portrait/sunset4.JPG);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .twelve{
-      background-image: url(../pics/portrait/sunset3.JPG);
-      background-size: cover;
-      background-position: center right 5%;
-    }
-    .cards .thirteen{
-      background-image: url(../pics/portrait/forest.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .fourteen{
-      background-image: url(../pics/portrait/forest2.JPG);
-      background-size: cover;
-      background-position: center right 11%;
-    }
-    .cards .fifteen{
-      background-image: url(../pics/portrait/forest3.JPG);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .seventeen{
-      background-image: url(../pics/portrait/forest4.jpg);
-      background-size: cover;
-      background-position: center right 25%;
-    }
-    .cards .eighteen{
-      background-image: url(../pics/portrait/ahmad.jpg);
-      background-size: cover;
-      background-position: center right 40%;
-    }
-    .cards .nineteen{
-      background-image: url(../pics/portrait/ahmad1.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .twenty{
-      background-image: url(../pics/portrait/ahmad2.JPG);
-      background-size: cover;
-    }
-    .cards .twentyone{
-      background-image: url(../pics/portrait/ahmad3.jpg);
-      background-size: cover;
-    }
-    .cards .twentytwo{
-      background-image: url(../pics/portrait/shim.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .twentythree{
-      background-image: url(../pics/portrait/shim1.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .twentyfour{
-      background-image: url(../pics/portrait/shim2.jpg);
-      background-size: cover;
-    }
-    .cards .twentyfive{
-      background-image: url(../pics/portrait/smi3.JPG);
-      background-size: cover;
-    }
-    .cards .twentysix{
-      background-image: url(../pics/portrait/sedo.jpg);
-      background-size: cover;
-      background-position: center right 60%;
-    }
-    .cards .twentyseven{
-      background-image: url(../pics/portrait/sedo1.JPG);
-      background-size: cover;
-    }
-    .cards .twentyeight{
-      background-image: url(../pics/portrait/sedo2.jpg);
-      background-size: cover;
-      background-position: center right 65%;
-    }
-    .cards .twentynine{
-      background-image: url(../pics/portrait/sedo3.jpg);
-      background-size: cover;
-    }
-    .cards .thirty{
-      background-image: url(../pics/portrait/jourie.jpg);
-      background-size: cover;
-      
-    }
-    .cards .thirtyone{
-      background-image: url(../pics/portrait/jourie1.JPG);
-      background-size: 120%;
-      background-position: center;
-    }
-    .cards .thirtytwo{
-      background-image: url(../pics/portrait/jourie2.jpg);
-      background-size: cover;
-    }
-    .cards .thirtythree{
-      background-image: url(../pics/portrait/jourie3.jpeg);
-      background-size: cover;}
-  .cards .thirtyfour{
-      background-image: url(../pics/portrait/hi.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .cards .thirtyfive{
-      background-image: url(../pics/portrait/hi1.JPG);
-      background-size: cover;
-    }
-    .cards .thirtysix{
-      background-image: url(../pics/portrait/hi2.jpeg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .thirtyseven{
-      background-image: url(../pics/portrait/hi3.JPG);
-      background-size: cover;
-    }
-    .cards .thirtyeight{
-      background-image: url(../pics/portrait/hag.jpg);
-      background-size: cover;
-    }
-    .cards .thirtynine{
-      background-image: url(../pics/portrait/hag1.jpg);
-      background-size: cover;
-    }
-    
-    .cards .fourty{
-      background-image: url(../pics/portrait/hag2.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .fourtyone{
-      background-image: url(../pics/portrait/hag3.JPG);
-      background-size: cover;
-      background-position: center right 51%;
-    }
-    .cards .fourtytwo{
-        background-image: url(../pics/portrait/por\ \(40\).jpg);
-        background-size: cover;
-        background-position: center;
-      }.cards .fourtythree{
-      background-image: url(../pics/portrait/por\ \(28\).jpg);
-      background-size: cover;
-      background-position: center right 51%;
-    }
-    .cards .fourtyfive{
-      background-image: url(../pics/portrait/por\ \(42\).jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .cards .fourtysix{
-      background-image: url(../pics/portrait/por\ \(43\).jpg);
-      background-size: cover;
-      background-position: center;
-    }
-    .cards .fourtyseven{
-      background-image: url(../pics/portrait/last.jpg);
-      background-size: cover;
-      background-position: center right 9%;
-    }
-  .cards .fourtyeight{
-      background-image: url(../pics/portrait/last1.jpg);
-      background-size: cover;
-      background-position: center;
-    }.cards .fourtynine{
-      background-image: url(../pics/portrait/last2.JPG);
-      background-size: cover;
-      background-position-y: bottom;
-    }
-    .cards .fifty{
-      background-image: url(../pics/portrait/last3.JPG);
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .cards .card p.tip {
-      font-size: 1em;
-      font-weight: 700;
-    }
-    
-    .cards .card p.second-text {
-      font-size: 0.7em;
-    }
-    
-    .cards .card:hover {
-      transform: scale(2);
-      z-index: 2;
-      position: relative;
-    }
-    
-    .cards:hover > .card:not(:hover) {
-      filter: blur(0px);
-      transform: scale(0.9);
-    }  
+}
