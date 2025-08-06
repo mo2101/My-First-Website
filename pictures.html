@@ -3,45 +3,73 @@
 <head>
     <title>My First Website</title>
     <link rel="stylesheet" href="css/pics1.css">
+    <style>
+        .card {
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            transition: filter 0.5s ease;
+        }
+        .card.loaded {
+            filter: blur(0);
+        }
+    </style>
 </head>
 <body>
-    <div class="all">
-        <div class="banner">
-            <div class="navbar">
-                <img src="signature.PNG" class="signature" alt="Signature">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="pictures.html">Pictures</a></li>
-                    <li><a href="videos.html">Videos</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+<div class="all">
+    <div class="banner">
+        <div class="navbar">
+            <img src="signature.PNG" class="signature" alt="Signature">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pictures.html">Pictures</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
-            <div class="text">
-                <h1>PICTURES</h1>
-                <p>Choose what kind of pictures would you like to see.</p>
-            </div>
-            <div class="cards">
-                <a class="card red" href="cars.html" aria-label="Cars" style="background-image: url('../pics/carclear.jpg');">
-                    <h1 class="tip">CARS</h1>
-                    <p class="second-text">Click Here</p>
-                </a>
-                <a class="card green" href="portrait.html" aria-label="Portrait" style="background-image: url('../pics/portrait.jpg');">
-                    <h1 class="tip">PORTRAIT</h1>
-                    <p class="second-text">Click Here</p>
-                </a>
-                <a class="card blue" href="city.html" aria-label="City" style="background-image: url('../pics/city.jpg');">
-                    <h1 class="tip">CITY</h1>
-                    <p class="second-text">Click Here</p>
-                </a>
-            </div>
 
+        <div class="text">
+            <h1>PICTURES</h1>
+            <p>Choose what kind of pictures would you like to see.</p>
+        </div>
+
+        <div class="cards">
+            <a class="card red" href="cars.html"
+               style="background-image: url('../pics/small/carclear-small.jpg');"
+               data-bg="../pics/carclear.jpg">
+                <h1 class="tip">CARS</h1>
+                <p class="second-text">Click Here</p>
+            </a>
+
+            <a class="card green" href="portrait.html"
+               style="background-image: url('../pics/small/portrait-small.jpg');"
+               data-bg="../pics/portrait.jpg">
+                <h1 class="tip">PORTRAIT</h1>
+                <p class="second-text">Click Here</p>
+            </a>
+
+            <a class="card blue" href="city.html"
+               style="background-image: url('../pics/small/city-small.jpg');"
+               data-bg="../pics/city.jpg">
+                <h1 class="tip">CITY</h1>
+                <p class="second-text">Click Here</p>
+            </a>
+        </div>
     </div>
+
     <script>
-                document.querySelectorAll('.card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        window.location.href = card.getAttribute('data-link');
-                    });
-                });
-     </script>
+        // Swap blurred small background with full image once loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                const highRes = card.getAttribute("data-bg");
+                const img = new Image();
+                img.src = highRes;
+                img.onload = () => {
+                    card.style.backgroundImage = `url('${highRes}')`;
+                    card.classList.add("loaded");
+                };
+            });
+        });
+    </script>
 </body>
 </html>
