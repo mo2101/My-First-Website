@@ -69,5 +69,19 @@
                 <div class="card" style="background-image: url('../pics/small/last3-small.JPG');"data-bg="../pic/portrait/moe.jpg"data-bg="../pic/portrait/last3.jpg" data-caption="Portrait 48" loading="lazy"></div>
         </div>
     </div>
+    <script>
+        // Swap blurred small background with full image once loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                const highRes = card.getAttribute("data-bg");
+                const img = new Image();
+                img.src = highRes;
+                img.onload = () => {
+                    card.style.backgroundImage = `url('${highRes}')`;
+                    card.classList.add("loaded");
+                };
+            });
+        });
+    </script>
 </body>
 </html>
