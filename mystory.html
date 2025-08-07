@@ -26,11 +26,35 @@
 
                 <div class="img-container">
                     <img src="/pics/IMG_0360.JPG" class="why" alt="firstpicture" width="500" height="300" loading="lazy">
-                    <div class="hover-text">Your Text Here</div>
+                    <div class="hover-text">Where it all started!</div>
                 </div>
             </div>
+            <div class="maintxt">
+                <h1> We rushed to our rooftop in Palestine, set up the camera on a tripod, and started getting some results. Although they were quite average, we were amazed at how those pictures turned out.</h1>
+            </div>
+            <div class="cards">
+                <div class="card" style="background-image: url('../pics/small/nablus-small.jpg');"data-bg="../pics/story/nablus.jpeg" data-caption="June 7, 2017" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/are7a-small.jpg');"data-bg="../pics/story/are7a.jpeg" data-caption="July 29 7, 2018" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bierziet-small.jpg');"data-bg="../pics/story/bierziet.jpeg" data-caption="July 5, 2017" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/amjad-small.jpg');"data-bg="../pics/story/amjad.jpeg" data-caption="August 23, 2017" loading="lazy"></div>
 
-    </div>       
+            </div>
+
+    </div>
+    <script>
+        // Swap blurred small background with full image once loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                const highRes = card.getAttribute("data-bg");
+                const img = new Image();
+                img.src = highRes;
+                img.onload = () => {
+                    card.style.backgroundImage = `url('${highRes}')`;
+                    card.classList.add("loaded");
+                };
+            });
+        });
+    </script>       
         
 </body>
 </html>
