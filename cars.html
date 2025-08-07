@@ -19,29 +19,42 @@
             <h1>CARS</h1>
         </div>
             <div class="cards">
-                <div class="card" style="background-image: url('../pics/bmw.jpg');" data-caption="BMW Front" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/challengerblue.JPG');" data-caption="Blue Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/ycar.JPG');" data-caption="Yellow Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/oldblue.JPG');" data-caption="Old Blue Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/mar.JPG');" data-caption="Maroon" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/marback.JPG');" data-caption="Maroon Rear" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/marfront.JPG');" data-caption="Maroon Front" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/yidk.JPG');" data-caption="Unknown Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/porsche.JPEG');" data-caption="Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/srt.JPEG');" data-caption="SRT" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/bmwb.JPG');" data-caption="BMW B" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/wporsche.JPG');" data-caption="White Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/rsrt.JPG');" data-caption="Red SRT" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/ycorvette.JPG');" data-caption="Corvette" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/salem.JPG');" data-caption="Salem Bike" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/wchallenger.JPG');" data-caption="White Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/oldwcar.jpg');" data-caption="Old White Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/bprosche.JPEG');" data-caption="Black Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/lambo.JPEG');" data-caption="Lamborghini" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/challenge.JPG');" data-caption="Challenge Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bmw-small.jpg');" data-bg="../pics/bmw.jpg" data-caption="BMW Front" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/challengerblue-small.JPG');" data-bg="../pics/challengerblue.jpg" data-caption="Blue Challenger" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/ycar-small.JPG');" data-bg="../pics/ycar.jpg" data-caption="Yellow Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/oldblue-small.JPG');" data-bg="../pics/oldblue.jpg" data-caption="Old Blue Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/mar-small.JPG');" data-bg="../pics/mar.jpg" data-caption="Maroon" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/marback-small.JPG');" data-bg="../pics/marback.jpg" data-caption="Maroon Rear" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/marfront-small.JPG');" data-bg="../pics/marfront.jpg" data-caption="Maroon Front" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/yidk-small.JPG');" data-bg="../pics/yidk.jpg" data-caption="Unknown Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bporsche-small.JPG');" data-bg="../pics/porsche.jpeg" data-caption="Porsche" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/jsrt-small.JPG');" data-bg="../pics/rsrt.jpg" data-caption="SRT" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bmwb-small.JPG');" data-bg="../pics/bmwb.jpg" data-caption="BMW B" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/wporsche-small.JPG');" data-bg="../pics/wporsche.jpg" data-caption="White Porsche" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/rsrt-small.JPG');" data-bg="../pics/srt.jpeg" data-caption="Red SRT" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/ycorvette-small.JPG');" data-bg="../pics/ycorvette.jpg" data-caption="Corvette" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/salem-small.JPG');" data-bg="../pics/salem.jpg" data-caption="Salem Bike" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/wchallenger-small.JPG');" data-bg="../pics/wchallenger.jpg" data-caption="White Challenger" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/oldwcar-small.jpg');" data-bg="../pics/oldwcar.jpg" data-caption="Old White Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bprosche-small.JPG');" data-bg="../pics/bprosche.jpeg" data-caption="Black Porsche" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/lambo-small.JPG');" data-bg="../pics/lambo.jpeg" data-caption="Lamborghini" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/challenge-small.JPG');" data-bg="../pics/challenge.jpg" data-caption="Challenge Car" loading="lazy"></div>
             </div>
-
         </div>
     </div>
+    <script>
+        // Swap blurred small background with full image once loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                const highRes = card.getAttribute("data-bg");
+                const img = new Image();
+                img.src = highRes;
+                img.onload = () => {
+                    card.style.backgroundImage = `url('${highRes}')`;
+                    card.classList.add("loaded");
+                };
+            });
+        });
+    </script>
 </body>
 </html>
