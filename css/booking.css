@@ -1,0 +1,225 @@
+/* ============ RESET / BASE ============ */
+* {
+  margin: 0;
+  font-family: sans-serif;
+  color: #fff;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden;              /* prevent sideways scroll on iOS */
+  -webkit-text-size-adjust: 100%;  /* iPhone font scaling */
+}
+
+/* ============ BANNER ============ */
+.banner {
+  width: 100%;
+  /* Fill the viewport correctly on iPhone/Safari */
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Keep the filename CASE exactly as your file on disk (JPEG vs jpeg) */
+  background-image: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)), url("../pics/background.JPEG");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;   /* for in-flow positioning */
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+  width: 85%;
+  margin-top: 10px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signature { width: 150px; cursor: pointer; }
+.navbar ul li {
+  display: inline-block;
+  margin: 0 20px;
+  position: relative;
+  list-style: none;
+}
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+.navbar ul li::after {
+  content: "";
+  height: 3px;
+  width: 0;
+  background: #f06553;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+.navbar ul li:hover::after { width: 100%; }
+
+/* Phone: match your narrow column layout */
+@media (max-width: 480px) {
+  .navbar { width: calc(100% - 32px); max-width: 360px; }
+}
+
+/* ============ CONTENT HEADER (page title) ============ */
+.content {
+  width: 100%;
+  max-width: 360px;     /* same narrow column as other pages */
+  margin: 0 auto;
+  padding: 12px 16px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.content h1 {
+  font-size: 40px;
+  letter-spacing: .06em;
+  margin: 24px 0 6px;
+  text-transform: uppercase;
+}
+.content p {
+  margin: 6px 0 10px;
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: .9;
+}
+@media (min-width: 480px) {
+  .content h1 { font-size: 50px; }
+}
+
+/* ===== Helper container to keep carousel in the same narrow column ===== */
+.bk-phone-container { width: 100%; max-width: 360px; margin: 0 auto; padding: 0 16px; }
+
+/* ============ BOOKING CAROUSEL ============ */
+:root {
+  --bk-card-w: 380px;
+  --bk-card-h: 520px;
+  --bk-gap: 28px;
+  --bk-anim: 520ms cubic-bezier(.2,.8,.2,1);
+  --bk-brand: #ff8a00;
+  --bk-dark: #111;
+  --bk-light: #fff;
+}
+
+.bk-carousel-wrap {
+  display: grid;
+  place-items: center;
+  padding: 12px 0 100px;    /* tighter like your other sections */
+  width: 100%;
+  background: transparent;  /* no gray background */
+}
+.bk-carousel { width: min(100%, 1180px); padding: 0 0 48px; position: relative; }
+.bk-stage { position: relative; height: var(--bk-card-h); perspective: 1200px; overflow: visible; touch-action: pan-y; }
+
+.bk-card {
+  position: absolute; top: 0; left: 50%;
+  width: var(--bk-card-w); height: var(--bk-card-h);
+  border-radius: 28px;
+  transform-origin: center bottom;
+  background: #222 center/cover no-repeat;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  transition: transform var(--bk-anim), opacity var(--bk-anim), filter var(--bk-anim), z-index var(--bk-anim);
+  will-change: transform, opacity, filter;
+  user-select: none;
+  overflow: hidden;
+}
+.bk-card .bk-overlay{
+  position: relative; z-index: 1;
+  display: grid; grid-template-rows: 1fr auto;
+  height: 100%; padding: 18px 20px 46px; /* lift content up */
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,.6) 65%, rgba(0,0,0,.85) 100%);
+  border-radius: inherit;
+}
+.bk-title{ align-self:end; font-weight:800; font-size:30px; letter-spacing:.3px; line-height:1.1; margin-bottom:30px; text-shadow:0 2px 10px rgba(0,0,0,.8); }
+.bk-meta{ display:flex; align-items:center; gap:12px; font-weight:700; }
+.bk-price{ margin-left:auto; background:rgba(0,0,0,.65); padding:6px 10px; border-radius:999px; margin-bottom:20px; }
+.bk-cta{ position:absolute; right:16px; bottom:22px; display:flex; gap:10px; z-index:3; }
+.bk-add{ border:none; border-radius:999px; background:var(--bk-brand); color:#fff; font-weight:800; padding:10px 14px; cursor:pointer; box-shadow:0 10px 24px rgba(0,0,0,.22); transition:transform .15s ease; margin-bottom:20px; }
+.bk-add:active{ transform:scale(.96); }
+
+.bk-controls{ position:absolute; left:50%; bottom:0; translate:-50% 20px; display:flex; align-items:center; gap:18px; width:max-content; }
+.bk-btn{ width:48px; height:48px; border-radius:999px; border:none; background:#fff; color:#111; display:grid; place-items:center; box-shadow:0 12px 30px rgba(0,0,0,.18); cursor:pointer; font-size:20px; font-weight:900; transition:transform 180ms ease; }
+.bk-btn:active{ transform:scale(.96); }
+.bk-dots{ display:flex; gap:8px; }
+.bk-dot{ width:8px; height:8px; border-radius:999px; background:#bbb; opacity:.6; transition:opacity var(--bk-anim), transform var(--bk-anim); }
+.bk-dot.bk-active{ opacity:1; transform:scale(1.3); background:var(--bk-brand); }
+
+@media (max-width: 1100px) {
+  :root { --bk-card-w: 320px; --bk-card-h: 440px; }
+}
+
+/* Phone sizing to match your narrow layout */
+@media (max-width: 480px) {
+  :root{
+    --bk-card-w: clamp(220px, 84vw, 300px);
+    --bk-card-h: clamp(320px, 58vh, 420px);
+    --bk-gap: 16px;
+  }
+  .bk-title{ font-size:22px; margin-bottom:16px; }
+  .bk-price{ padding:4px 8px; margin-bottom:10px; }
+  .bk-cta{ bottom:14px; }
+  .bk-btn{ width:42px; height:42px; font-size:18px; }
+  .bk-controls{ translate:-50% 12px; gap:14px; }
+  .bk-dot{ width:10px; height:10px; }
+}
+
+/* ============ CART (FAB + DRAWER) ============ */
+.bk-cart-fab{
+  position: fixed; right: 16px;
+  bottom: max(14px, env(safe-area-inset-bottom, 0px) + 10px); /* iPhone safe area */
+  z-index: 3000;
+  display: flex; align-items: center; gap: 10px;
+  background: #252525;
+  color: #fff;                 /* readable on dark fab */
+  border-radius: 999px; padding: 10px 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.22);
+  cursor: pointer; border: none; font-weight: 800;
+}
+.bk-cart-fab svg{ width:22px; height:22px; }
+.bk-cart-badge{ background:var(--bk-brand); color:#fff; border-radius:999px; padding:2px 8px; font-size:12px; font-weight:900; }
+.bk-cart-total{ font-weight:900; }
+
+.bk-drawer-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:3300; }
+.bk-drawer{
+  position:fixed; top:0; right:0; height:100dvh; width:min(92vw,420px);
+  background:#252525; box-shadow:-20px 0 60px rgba(0,0,0,.28);
+  translate:100% 0; transition:translate .32s cubic-bezier(.2,.8,.2,1); z-index:3400;
+  display:flex; flex-direction:column;
+}
+.bk-drawer.open{ translate:0 0; }
+.bk-drawer-backdrop.open{ opacity:1; pointer-events:auto; }
+
+.bk-d-head{ padding:18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #707070; }
+.bk-d-title{ font-size:18px; font-weight:900; }
+.bk-d-close{ border:none; background:transparent; cursor:pointer; font-size:22px; }
+
+.bk-d-body{ padding:10px 14px; overflow:auto; flex:1; }
+.bk-line{ display:grid; grid-template-columns:64px 1fr auto; gap:10px; align-items:center; padding:10px 6px; border-bottom:1px solid #707070; }
+.bk-line img{ width:64px; height:64px; object-fit:cover; border-radius:10px; }
+.bk-line .bk-l-title{ font-weight:800; }
+.bk-qty{ display:flex; align-items:center; gap:8px; }
+.bk-qty button{ width:28px; height:28px; border-radius:8px; border:1px solid #ddd; background:#252525; cursor:pointer; }
+.bk-remove{ border:none; background:transparent; color:#d33; cursor:pointer; font-size:12px; }
+
+.bk-d-foot{
+  padding:16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); /* iPhone safe area */
+  border-top:1px solid #707070; display:grid; gap:10px;
+}
+.bk-row{ display:flex; justify-content:space-between; font-weight:800; }
+.bk-checkout{ border:none; border-radius:12px; background:var(--bk-brand); color:#fff; font-weight:900; padding:14px 16px; cursor:pointer; }
+
+/* ============ TOAST ============ */
+.bk-toast{
+  position:fixed; left:50%; bottom:100px; translate:-50% 20px; background:#111; color:#fff;
+  padding:10px 14px; border-radius:12px; opacity:0; pointer-events:none; transition:opacity .25s ease, translate .25s ease; z-index:3600;
+}
+.bk-toast.show{ opacity:1; translate:-50% 0; }
