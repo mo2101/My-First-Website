@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Booking</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/videos.css">
+
+  <style>
+    /* ----- Global mobile sanity (iPhone safe) ----- */
+    html, body { width:100%; overflow-x:hidden; -webkit-text-size-adjust:100%; }
+
+    /* ===== Carousel (scoped) ===== */
+    :root {
+      --bk-card-w: 380px;
+      --bk-card-h: 520px;
+      --bk-gap: 28px;
+      --bk-anim: 520ms cubic-bezier(.2,.8,.2,1);
+      --bk-brand: #ff8a00;
+      --bk-dark: #111;
+      --bk-light: #fff;
+    }
+    .bk-carousel-wrap{display:grid;place-items:center;padding:24px 0 120px; width:100%;}
+    .bk-carousel{width:min(100%,1180px);padding:24px 16px 56px;position:relative}
+    .bk-stage{position:relative;height:var(--bk-card-h);perspective:1200px;overflow:visible;touch-action:pan-y}
+    .bk-card{position:absolute;top:0;left:50%;width:var(--bk-card-w);height:var(--bk-card-h);border-radius:28px;transform-origin:center bottom;background:#222 center/cover no-repeat;box-shadow:0 20px 60px rgba(0,0,0,.25);transition:transform var(--bk-anim),opacity var(--bk-anim),filter var(--bk-anim),z-index var(--bk-anim);will-change:transform,opacity,filter;user-select:none;overflow:hidden}
+    .bk-card .bk-overlay{
+      position: relative;
+      z-index: 1;
+      display:grid;grid-template-rows:1fr auto;height:100%;
+      padding: 18px 20px 46px; /* lift content up */
+      color:#fff;
+      background:linear-gradient(to bottom,rgba(0,0,0,.0) 40%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.85) 100%);
+      border-radius:inherit
+    }
+    .bk-title{align-self:end;font-weight:800;font-size:30px;letter-spacing:.3px;line-height:1.1;margin-bottom:30px;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+    .bk-meta{display:flex;align-items:center;gap:12px;font-weight:700}
+    .bk-price{margin-left:auto;background:rgba(0,0,0,.65);padding:6px 10px;border-radius:999px;margin-bottom:20px;}
+    .bk-cta{position:absolute;right:16px;bottom:22px;display:flex;gap:10px;z-index:3;}
+    .bk-add{border:none;border-radius:999px;background:var(--bk-brand);color:#fff;font-weight:800;padding:10px 14px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.22);transition:transform .15s ease;margin-bottom:20px;}
+    .bk-add:active{transform:scale(.96)}
+
+    .bk-controls{position:absolute;left:50%;bottom:0;translate:-50% 20px;display:flex;align-items:center;gap:18px;width:max-content}
+    .bk-btn{width:48px;height:48px;border-radius:999px;border:none;background:#fff;color:#111;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:pointer;font-size:20px;font-weight:900;transition:transform 180ms ease}
+    .bk-btn:active{transform:scale(.96)}
+    .bk-dots{display:flex;gap:8px}
+    .bk-dot{width:8px;height:8px;border-radius:999px;background:#bbb;opacity:.6;transition:opacity var(--bk-anim),transform var(--bk-anim)}
+    .bk-dot.bk-active{opacity:1;transform:scale(1.3);background:var(--bk-brand)}
+
+    @media (max-width:1100px){:root{--bk-card-w:320px;--bk-card-h:440px}}
+
+    /* ----- Phone (iPhone and narrow) ----- */
+    @media (max-width:480px){
+      :root{
+        --bk-card-w: clamp(220px, 82vw, 300px);
+        --bk-card-h: clamp(320px, 60vh, 420px);
+        --bk-gap: 16px;
+      }
+      .bk-title{ font-size:22px; margin-bottom:18px; }
+      .bk-price{ padding:4px 8px; margin-bottom:12px;}
+      .bk-cta{ bottom:16px; }
+      .bk-btn{ width:44px; height:44px; }
+      .bk-controls{ translate:-50% 14px; }
+      .bk-dot{ width:10px; height:10px; }
+    }
+
+    /* ===== Cart Button (FAB) ===== */
+    .bk-cart-fab{
+      position:fixed; right:24px;
+      bottom:max(16px, env(safe-area-inset-bottom, 0px) + 12px); /* safe-area aware */
+      z-index:3000;
+      display:flex; align-items:center; gap:12px;
+      background:#252525; color:#111; border-radius:999px; padding:10px 14px;
+      box-shadow:0 14px 40px rgba(0,0,0,.22); cursor:pointer; border:none; font-weight:800;
+    }
+    .bk-cart-fab svg{width:22px;height:22px}
+    .bk-cart-badge{background:var(--bk-brand); color:#fff; border-radius:999px; padding:2px 8px; font-size:12px; font-weight:900;}
+    .bk-cart-total{font-weight:900}
+
+    /* ===== Drawer ===== */
+    .bk-drawer-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:3300;}
+    .bk-drawer{
+      position:fixed; top:0; right:0; height:100dvh; width:min(92vw,420px);
+      background:#252525; box-shadow:-20px 0 60px rgba(0,0,0,.28);
+      translate:100% 0; transition:translate .32s cubic-bezier(.2,.8,.2,1); z-index:3400;
+      display:flex; flex-direction:column;
+    }
+    .bk-drawer.open{ translate:0 0; }
+    .bk-drawer-backdrop.open{ opacity:1; pointer-events:auto; }
+
+    .bk-d-head{padding:18px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #707070}
+    .bk-d-title{font-size:18px; font-weight:900}
+    .bk-d-close{border:none;background:transparent;cursor:pointer;font-size:22px}
+
+    .bk-d-body{padding:10px 14px; overflow:auto; flex:1}
+    .bk-line{display:grid; grid-template-columns:64px 1fr auto; gap:10px; align-items:center; padding:10px 6px; border-bottom:1px solid #707070}
+    .bk-line img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+    .bk-line .bk-l-title{font-weight:800}
+    .bk-qty{display:flex; align-items:center; gap:8px}
+    .bk-qty button{width:28px;height:28px;border-radius:8px;border:1px solid #ddd;background:#252525;cursor:pointer}
+    .bk-remove{border:none;background:transparent;color:#d33;cursor:pointer;font-size:12px}
+
+    .bk-d-foot{
+      padding:16px;
+      padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px)); /* safe-area */
+      border-top:1px solid #707070; display:grid; gap:10px
+    }
+    .bk-row{display:flex; justify-content:space-between; font-weight:800}
+    .bk-checkout{border:none;border-radius:12px;background:var(--bk-brand);color:#fff;font-weight:900;padding:14px 16px;cursor:pointer}
+
+    /* toast */
+    .bk-toast{
+      position:fixed; left:50%; bottom:100px; translate:-50% 20px; background:#111; color:#fff;
+      padding:10px 14px; border-radius:12px; opacity:0; pointer-events:none; transition:opacity .25s ease, translate .25s ease; z-index:3600;
+    }
+    .bk-toast.show{opacity:1; translate:-50% 0}
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <div class="navbar">
+      <img src="signature.PNG" class="signature" alt="Baki Photography signature">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pictures.html">Pictures</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html">booking</a></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h1>BOOKING</h1>
+      <p>Multiple options available!</p>
+    </div>
+
+    <!-- Center-Focus Carousel -->
+    <section class="bk-carousel-wrap">
+      <div class="bk-carousel" id="bkCarousel">
+        <div class="bk-stage" id="bkStage"></div>
+        <div class="bk-controls">
+          <button class="bk-btn" id="bkPrev" aria-label="Previous">←</button>
+          <div class="bk-dots" id="bkDots"></div>
+          <button class="bk-btn" id="bkNext" aria-label="Next">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Cart Button -->
+    <button class="bk-cart-fab" id="bkCartFab" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6l-2-2"/><circle cx="9" cy="20" r="1.8"/><circle cx="18" cy="20" r="1.8"/>
+      </svg>
+      <span class="bk-cart-badge" id="bkCartCount">0</span>
+      <span class="bk-cart-total" id="bkCartTotal">$0</span>
+    </button>
+
+    <!-- Drawer -->
+    <div class="bk-drawer-backdrop" id="bkDrawerBg"></div>
+    <aside class="bk-drawer" id="bkDrawer" aria-hidden="true">
+      <header class="bk-d-head">
+        <div class="bk-d-title">Your Selection</div>
+        <button class="bk-d-close" id="bkCloseDrawer" aria-label="Close">✕</button>
+      </header>
+      <div class="bk-d-body" id="bkLines"></div>
+      <footer class="bk-d-foot">
+        <div class="bk-row"><span>Subtotal</span><span id="bkSub">$0</span></div>
+        <div class="bk-row" style="font-size:13px;color:#666"><span>Tax (placeholder)</span><span id="bkTax">$0</span></div>
+        <div class="bk-row" style="font-size:20px"><span>Total</span><span id="bkTotal">$0</span></div>
+        <a id="bkCheckoutLink" href="checkout.html">
+          <button class="bk-checkout" style="width:100%">Go to Checkout</button>
+        </a>
+      </footer>
+    </aside>
+
+    <div class="bk-toast" id="bkToast">Added to cart</div>
+  </div>
+
+  <script>
+    /* =================== DATA =================== */
+    const bkItems = [
+      { id: "wed",   title: "Weddings",  price: 1499.99, img: "pics/IMG_1755.JPG" },
+      { id: "eng",   title: "Engagement", price: 1199.99, img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" },
+      { id: "pizza", title: "Cars",    price: 199.99,  img: "pics/carclear.jpg" },
+      { id: "port",  title: "Portraits", price: 99.99, img: "pics/portrait/moe3.jpg" },
+      { id: "mtrn",  title: "Party",        price: 199.99, img: "pics/portrait/saif.jpg" },
+      { id: "fam",   title: "Family",     price: 349.99, img: "pics/portrait/chase.jpeg" }
+    ];
+
+    /* =================== CAROUSEL =================== */
+    const bkStage = document.getElementById('bkStage');
+    const bkDotsWrap = document.getElementById('bkDots');
+    const bkPrev = document.getElementById('bkPrev');
+    const bkNext = document.getElementById('bkNext');
+
+    const bkCards = bkItems.map((it) => {
+      const el = document.createElement('article');
+      el.className = 'bk-card';
+      el.style.backgroundImage = `url("${it.img}")`;
+      el.innerHTML = `
+        <div class="bk-overlay">
+          <div></div>
+          <div class="bk-meta">
+            <div class="bk-title">${it.title}</div>
+            <div class="bk-price">$${it.price}</div>
+          </div>
+        </div>
+        <div class="bk-cta">
+          <button class="bk-add" data-id="${it.id}">Add</button>
+        </div>
+      `;
+      bkStage.appendChild(el);
+      return el;
+    });
+
+    const bkDots = bkItems.map((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'bk-dot';
+      d.addEventListener('click', () => bkGoTo(i));
+      bkDotsWrap.appendChild(d);
+      return d;
+    });
+
+    let bkIndex = 2; const bkMaxSpread = 3;
+    function bkRender() {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const cardW = parseInt(rootStyles.getPropertyValue('--bk-card-w'));
+      const gap   = parseInt(rootStyles.getPropertyValue('--bk-gap') || 28);
+
+      /* On narrow screens, reduce spread so neighbors fit nicely */
+      const spreadFactor = (window.innerWidth <= 500) ? 0.62 : 0.72;
+      const stepX = (cardW + gap) * spreadFactor;
+
+      bkCards.forEach((card, i) => {
+        const dist = bkDelta(i, bkIndex, bkCards.length);
+        const clamped = Math.max(-bkMaxSpread, Math.min(bkMaxSpread, dist));
+        const x = clamped * stepX;
+        const s = bkScale(Math.abs(clamped));
+        const z = 100 - Math.abs(clamped);
+        const opacity = Math.abs(clamped) > bkMaxSpread ? 0 : 1;
+        const blur = Math.max(0, Math.abs(clamped) - 1) * 1.2;
+
+        card.style.zIndex = String(1000 + z);
+        card.style.opacity = opacity;
+        card.style.filter = `saturate(${1 - Math.abs(clamped)*0.08}) blur(${blur}px)`;
+        card.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${Math.abs(clamped)*6}px) scale(${s}) rotateY(${clamped * -2.2}deg)`;
+      });
+
+      bkDots.forEach((d, i) => d.classList.toggle('bk-active', i === bkIndex));
+    }
+    function bkScale(d){return 1-(0.14*Math.min(d,1))-(d>1?(d-1)*0.12:0)}
+    function bkDelta(from,to,n){let d=(from-to)%n;if(d>n/2)d-=n;if(d<-n/2)d+=n;return d}
+    function bkGoTo(i){bkIndex=(i+bkCards.length)%bkCards.length;bkRender()}
+    function bkNextFn(){bkGoTo(bkIndex+1)}
+    function bkPrevFn(){bkGoTo(bkIndex-1)}
+    bkNext.addEventListener('click', bkNextFn);
+    bkPrev.addEventListener('click', bkPrevFn);
+
+    // ---- swipe (ignore when starting/ending on Add) ----
+    let startX = null;
+    bkStage.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.bk-cta') || e.target.closest('.bk-add')) return;
+      startX = e.clientX;
+      bkStage.setPointerCapture(e.pointerId);
+    });
+    bkStage.addEventListener('pointerup', (e) => {
+      if (startX == null) return;
+      if (e.target.closest('.bk-cta') || e.target.closest('.bk-add')) { startX = null; return; }
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 40) (dx < 0 ? bkNextFn : bkPrevFn)();
+      startX = null;
+    });
+
+    // ---- direct binding to Add buttons (extra-safe) ----
+    bkStage.querySelectorAll('.bk-add').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.dataset.id;
+        const item = bkItems.find(x => x.id === id);
+        if (!item) return;
+        bkCart.add(item, 1);
+        bkToast('Added "' + item.title + '"');
+        e.stopPropagation();
+      });
+    });
+
+    bkRender(); window.addEventListener('resize', bkRender);
+
+    /* =================== CART =================== */
+    const bkCartFab = document.getElementById('bkCartFab');
+    const bkCartCount = document.getElementById('bkCartCount');
+    const bkCartTotal = document.getElementById('bkCartTotal');
+    const bkDrawer = document.getElementById('bkDrawer');
+    const bkDrawerBg = document.getElementById('bkDrawerBg');
+    const bkCloseDrawer = document.getElementById('bkCloseDrawer');
+    const bkLines = document.getElementById('bkLines');
+    const elSub = document.getElementById('bkSub');
+    const elTax = document.getElementById('bkTax');
+    const elTot = document.getElementById('bkTotal');
+
+    const USE_LOCAL_STORAGE = true; // set true to persist cart across reloads
+
+    const bkCart = {
+      items: {}, // {id: {id,title,price,img,qty}}
+      add(item, qty=1){
+        if(!this.items[item.id]) this.items[item.id] = {...item, qty:0};
+        this.items[item.id].qty += qty;
+        this._changed();
+      },
+      dec(id){ if(this.items[id]){ this.items[id].qty--; if(this.items[id].qty<=0) delete this.items[id]; this._changed(); } },
+      inc(id){ if(this.items[id]){ this.items[id].qty++; this._changed(); } },
+      remove(id){ delete this.items[id]; this._changed(); },
+      list(){ return Object.values(this.items); },
+      totals(){
+        const sub = this.list().reduce((s,i)=>s+i.price*i.qty,0);
+        const tax = 0; // hook your real tax here
+        return { sub, tax, total: sub + tax };
+      },
+      _changed(){
+        if(USE_LOCAL_STORAGE){
+          localStorage.setItem('bkCart', JSON.stringify(this.items));
+        }
+        renderCart();
+      },
+      load(){
+        if(USE_LOCAL_STORAGE){
+          const raw = localStorage.getItem('bkCart');
+          if(raw){ try{ this.items = JSON.parse(raw) || {}; }catch{} }
+        }
+        renderCart();
+      }
+    };
+
+    function renderCart(){
+      const count = bkCart.list().reduce((n,i)=>n+i.qty,0);
+      const {sub,tax,total} = bkCart.totals();
+      bkCartCount.textContent = count;
+      bkCartTotal.textContent = currency(total);
+
+      bkLines.innerHTML = '';
+      if(count===0){
+        bkLines.innerHTML = `<p style="color:#666;padding:8px 6px">No items selected yet.</p>`;
+      } else {
+        bkCart.list().forEach(i=>{
+          const row = document.createElement('div');
+          row.className = 'bk-line';
+          row.innerHTML = `
+            <img src="${i.img}" alt="">
+            <div>
+              <div class="bk-l-title">${i.title}</div>
+              <div style="color:#666;font-size:13px">$${i.price} each</div>
+              <button class="bk-remove" data-id="${i.id}">Remove</button>
+            </div>
+            <div style="text-align:right">
+              <div class="bk-qty">
+                <button data-op="dec" data-id="${i.id}">−</button>
+                <div>${i.qty}</div>
+                <button data-op="inc" data-id="${i.id}">＋</button>
+              </div>
+              <div style="margin-top:6px;font-weight:800">${currency(i.price*i.qty)}</div>
+            </div>
+          `;
+          bkLines.appendChild(row);
+        });
+      }
+      elSub.textContent = currency(sub);
+      elTax.textContent = currency(tax);
+      elTot.textContent = currency(total);
+    }
+
+    // qty controls
+    bkLines.addEventListener('click', (e)=>{
+      const id = e.target.dataset.id;
+      const op = e.target.dataset.op;
+      if(!id) return;
+      if(op==='inc') bkCart.inc(id);
+      else if(op==='dec') bkCart.dec(id);
+      else if(e.target.classList.contains('bk-remove')) bkCart.remove(id);
+    });
+
+    // drawer open/close
+    function openDrawer(){ bkDrawer.classList.add('open'); bkDrawerBg.classList.add('open'); bkDrawer.setAttribute('aria-hidden','false'); }
+    function closeDrawer(){ bkDrawer.classList.remove('open'); bkDrawerBg.classList.remove('open'); bkDrawer.setAttribute('aria-hidden','true'); }
+    bkCartFab.addEventListener('click', openDrawer);
+    bkDrawerBg.addEventListener('click', closeDrawer);
+    bkCloseDrawer.addEventListener('click', closeDrawer);
+
+    function currency(n){ return '$'+n.toFixed(2); }
+
+    // toast
+    const toast = document.getElementById('bkToast');
+    let toastT = null;
+    function bkToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastT);
+      toastT = setTimeout(()=>toast.classList.remove('show'), 1300);
+    }
+
+    bkCart.load();
+  </script>
+</body>
+</html>

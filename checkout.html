@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Checkout – Baki Photography</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/videos.css">
+  <style>
+    :root{
+      --brand:#ff8a00; --ink:#111; --muted:#666; --bg:#f6f6f6;
+    }
+    html,body{margin:0;background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .wrap{max-width:960px;margin:0 auto;padding:20px}
+    header{display:flex;align-items:center;gap:12px;padding:12px 0;justify-content: space-between;}
+    header img{height:200px}
+    h1{margin:6px 0 18px;font-size:28px}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+    .card{background:rgba(255, 255, 255, 0.1);border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);padding:45px;padding-left: 10px;}
+    .items{display:grid;gap:12px}
+    .line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed #eee}
+    .line:last-child{border-bottom:none}
+    .line img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+    .title{font-weight:800}
+    .muted{color:var(--muted);font-size:13px}
+    .right{text-align:right}
+    .row{display:flex;justify-content:space-between;margin:6px 0;font-weight:700}
+    .total{font-size:20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;background:var(--brand);color:#fff;font-weight:900;cursor:pointer}
+    .btn.secondary{background:#fff;color:var(--ink);border:1px solid #ddd}
+    form{display:grid;gap:12px}
+    label{font-size:13px;color:#fff}
+    input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:16px;background-color: #252525;}
+    textarea{min-height:110px;resize:vertical}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .empty{padding:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="booking.html" class="btn secondary">← Back</a>
+      <img src="signature.PNG" alt="Baki Photography" />
+    </header>
+
+    <h1>Review & Checkout</h1>
+
+    <div class="grid">
+      <!-- Order Summary -->
+      <section class="card">
+        <h2 style="margin:0 0 12px">Your Selection</h2>
+        <div id="items" class="items"></div>
+        <div id="empty" class="empty" style="display:none">Your cart is empty.</div>
+        <hr style="border:none;height:1px;background:#eee;margin:12px 0">
+        <div class="row"><span>Subtotal</span><span id="sub">$0</span></div>
+        <div class="row"><span class="muted">Tax (placeholder)</span><span id="tax">$0</span></div>
+        <div class="row total"><span>Total</span><span id="tot">$0</span></div>
+      </section>
+
+      <!-- Booking Form -->
+      <section class="card">
+        <h2 style="margin:0 0 12px">Your Details</h2>
+
+        <!-- Netlify Forms: it will capture submissions automatically on Netlify -->
+        <form name="baki-checkout" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <!-- If not on Netlify, you can use Formspree:
+               <form action="https://formspree.io/f/your-id" method="POST">
+          -->
+          <input type="hidden" name="form-name" value="baki-checkout">
+          <input type="hidden" name="cart_json" id="cart_json" value="{}">
+
+          <p style="display:none">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div>
+            <label for="name">Full Name</label>
+            <input id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" />
+          </div>
+          <div>
+            <label for="date">Preferred Date</label>
+            <input id="date" type="date" name="preferred_date" />
+          </div>
+          <div>
+            <label for="time">Preferred Time</label>
+            <input id="time" type="time" name="preferred_time" />
+          </div>
+          <div>
+            <label for="notes">Notes / Location / Special Requests</label>
+            <textarea id="notes" name="notes" placeholder="Tell me about the session you want…"></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Request Booking</button>
+            <a class="btn secondary" href="booking.html">Edit Selection</a>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Read cart from localStorage (saved by your pictures page)
+    const CART_KEY = 'bkCart';
+
+    function readCart(){
+      try{
+        const raw = localStorage.getItem(CART_KEY);
+        if(!raw) return {};
+        return JSON.parse(raw) || {};
+      }catch(e){ return {}; }
+    }
+
+    function toList(itemsObj){ return Object.values(itemsObj || {}); }
+    function money(n){ return '$' + (n||0).toFixed(2); }
+
+    function render(){
+      const itemsObj = readCart();
+      const list = toList(itemsObj);
+
+      const itemsEl = document.getElementById('items');
+      const emptyEl = document.getElementById('empty');
+      const subEl = document.getElementById('sub');
+      const taxEl = document.getElementById('tax');
+      const totEl = document.getElementById('tot');
+      const hiddenCart = document.getElementById('cart_json');
+
+      itemsEl.innerHTML = '';
+      if(list.length === 0){
+        emptyEl.style.display = 'block';
+      }else{
+        emptyEl.style.display = 'none';
+        list.forEach(i => {
+          const row = document.createElement('div');
+          row.className = 'line';
+          row.innerHTML = `
+            <img src="${i.img}" alt="">
+            <div>
+              <div class="title">${i.title}</div>
+              <div class="muted">$${i.price} each × ${i.qty}</div>
+            </div>
+            <div class="right"><strong>${money(i.price * i.qty)}</strong></div>
+          `;
+          itemsEl.appendChild(row);
+        });
+      }
+
+      const sub = list.reduce((s,i)=>s + i.price*i.qty, 0);
+      const tax = 0; // set your real tax logic here if needed
+      const tot = sub + tax;
+
+      subEl.textContent = money(sub);
+      taxEl.textContent = money(tax);
+      totEl.textContent = money(tot);
+
+      // Send full cart payload with the form
+      hiddenCart.value = JSON.stringify({
+        items: list.map(i => ({ id:i.id, title:i.title, price:i.price, qty:i.qty })),
+        totals: { subtotal: sub, tax, total: tot }
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
