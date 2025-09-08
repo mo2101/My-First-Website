@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pictures</title>
+    <title>Photos | Baki Photography</title>
     <link rel="stylesheet" href="css/portrait.css">
 </head>
 <body>
@@ -10,10 +10,11 @@
             <img src="signature.PNG" class="signature" alt="Signature">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="pictures.html">Pictures</a></li>
+                <li><a href="pictures.html">Photos</a></li>
                 <li><a href="videos.html">Videos</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="booking.html">booking</a></li>
+                <li><a href="review.html">Reviews</a></li>
             </ul>
         </div>
         <div class="contentone">
@@ -69,6 +70,10 @@
                 <div class="card" style="background-image: url('../pics/small/last2-small.JPG');" data-bg="../pics/portrait/last2.jpg" data-caption="Portrait 47" loading="lazy"></div>
                 <div class="card" style="background-image: url('../pics/small/last3-small.JPG');" data-bg="../pics/portrait/moe.jpg" data-caption="Portrait 48" loading="lazy"></div>
         </div>
+        <footer class="site-footer">
+            © <span id="year"></span> Baki Photography — All rights reserved.
+            </footer>
+
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -83,6 +88,10 @@
         });
     });
 </script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 
 </body>
 </html>

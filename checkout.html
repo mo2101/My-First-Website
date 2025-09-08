@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Checkout – Baki Photography</title>
+  <title>Checkout | Baki Photography</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="css/videos.css">
   <style>
@@ -105,6 +105,10 @@
         </form>
       </section>
     </div>
+    <footer class="site-footer">
+      © <span id="year"></span> Baki Photography — All rights reserved.
+    </footer>
+
   </div>
 
   <script>
@@ -170,5 +174,8 @@
 
     render();
   </script>
+  <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

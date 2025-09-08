@@ -221,4 +221,16 @@
         transform: scale(0.9);
     }
   }
-  
+  .site-footer{
+  position: fixed;            /* stays at the bottom even when scrolling */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(12px, env(safe-area-inset-bottom)); /* friendly on iPhone notch */
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: .3px;
+  opacity: .85;
+  padding: 6px 10px; /* subtle contrast on busy photos */
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}

@@ -104,10 +104,11 @@
       <img src="signature.PNG" class="signature" alt="Baki Photography signature">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="pictures.html">Pictures</a></li>
+        <li><a href="pictures.html">Photos</a></li>
         <li><a href="videos.html">Videos</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="booking.html">booking</a></li>
+        <li><a href="review.html">Reviews</a></li>
       </ul>
     </div>
 
@@ -156,6 +157,10 @@
     </aside>
 
     <div class="bk-toast" id="bkToast">Added to cart</div>
+    <footer class="site-footer">
+      © <span id="year"></span> Baki Photography — All rights reserved.
+    </footer>
+
   </div>
 
   <script>
@@ -380,5 +385,8 @@
 
     bkCart.load();
   </script>
+  <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

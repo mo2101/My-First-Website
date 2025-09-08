@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Reviews | Baki Photography</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/review.css" />
+  </head>
+  <body>
+    <div class="banner">
+      <!-- NAVBAR (unchanged) -->
+      <div class="navbar">
+        <img src="signature.PNG" class="signature" alt="Baki Photography signature">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pictures.html">Photos</a></li>
+          <li><a href="videos.html">Videos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="booking.html">Booking</a></li>
+          <li><a href="review.html">Reviews</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <h1>REVIEWS</h1>
+        <p>If you’ve worked with me, I’d love your feedback. Read what others said or leave a review below.</p>
+
+        <main class="reviews-wrap" aria-labelledby="reviewsTitle">
+          <h2 id="reviewsTitle" class="sr-only">Client Reviews</h2>
+
+          <!-- Tabs + Admin -->
+          <div class="tabs-row">
+            <div class="tabs" role="tablist" aria-label="Reviews tabs">
+              <button class="tab is-active" id="tab-list" role="tab" aria-selected="true" aria-controls="panel-list" tabindex="0">
+                See Reviews
+              </button>
+              <button class="tab" id="tab-form" role="tab" aria-selected="false" aria-controls="panel-form" tabindex="-1">
+                Leave a Review
+              </button>
+            </div>
+
+            <div class="admin-controls">
+              <button id="adminBtn" class="btn admin-btn" type="button" title="Admin login">🔒 Admin</button>
+              <span id="adminBadge" class="admin-badge" hidden>Admin mode</span>
+              <button id="logoutBtn" class="btn admin-btn outline" type="button" hidden>Log out</button>
+            </div>
+          </div>
+
+          <!-- Panel: List -->
+          <section id="panel-list" class="tab-panel is-active" role="tabpanel" aria-labelledby="tab-list">
+            <div class="controls">
+              <div class="control">
+                <label for="filterType">Type</label>
+                <select id="filterType">
+                  <option value="all">All types</option>
+                  <option>Wedding</option>
+                  <option>Portrait</option>
+                  <option>Engagement</option>
+                  <option>Family</option>
+                  <option>Event</option>
+                  <option>Product</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="control">
+                <label for="filterRating">Min rating</label>
+                <select id="filterRating">
+                  <option value="0">All (0+)</option>
+                  <option value="5">5★</option>
+                  <option value="4">4★+</option>
+                  <option value="3">3★+</option>
+                  <option value="2">2★+</option>
+                  <option value="1">1★+</option>
+                </select>
+              </div>
+
+              <div class="control">
+                <label for="sortBy">Sort</label>
+                <select id="sortBy">
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="highest">Highest rated</option>
+                  <option value="lowest">Lowest rated</option>
+                </select>
+              </div>
+
+              <div class="control grow search">
+                <label for="searchText">Search</label>
+                <input id="searchText" type="search" placeholder="Search by name or message…" />
+              </div>
+            </div>
+
+            <ul id="reviewsList" class="reviews" aria-live="polite" aria-busy="false"></ul>
+            <div id="emptyState" class="empty" hidden>
+              <p>No reviews match your filters yet.</p>
+            </div>
+          </section>
+
+          <!-- Panel: Form -->
+          <section id="panel-form" class="tab-panel" role="tabpanel" aria-labelledby="tab-form" aria-hidden="true">
+            <form id="reviewForm" novalidate>
+              <fieldset class="grid">
+                <div class="field">
+                  <label for="name">Your name <span class="req">*</span></label>
+                  <input id="name" name="name" type="text" autocomplete="name" required maxlength="60" />
+                </div>
+
+                <div class="field">
+                  <label for="shootType">Photoshoot type <span class="req">*</span></label>
+                  <select id="shootType" name="shootType" required>
+                    <option value="" disabled selected>Select a type</option>
+                    <option>Wedding</option>
+                    <option>Portrait</option>
+                    <option>Engagement</option>
+                    <option>Family</option>
+                    <option>Event</option>
+                    <option>Product</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </fieldset>
+
+              <div class="field">
+                <span class="label">Your rating <span class="req">*</span></span>
+                <div class="stars" role="radiogroup" aria-labelledby="ratingLabel">
+                  <span id="ratingLabel" class="sr-only">Rate out of 5</span>
+
+                  <input type="radio" name="rating" id="star5" value="5" required />
+                  <label for="star5" title="5 stars">★</label>
+
+                  <input type="radio" name="rating" id="star4" value="4" />
+                  <label for="star4" title="4 stars">★</label>
+
+                  <input type="radio" name="rating" id="star3" value="3" />
+                  <label for="star3" title="3 stars">★</label>
+
+                  <input type="radio" name="rating" id="star2" value="2" />
+                  <label for="star2" title="2 stars">★</label>
+
+                  <input type="radio" name="rating" id="star1" value="1" />
+                  <label for="star1" title="1 star">★</label>
+                </div>
+                <div id="ratingLive" class="live" aria-live="polite"></div>
+              </div>
+
+              <div class="field">
+                <label for="message">Short review <span class="req">*</span></label>
+                <textarea id="message" name="message" rows="5" minlength="10" maxlength="600" placeholder="Tell others about your experience…" required></textarea>
+                <p class="hint">10–600 characters.</p>
+              </div>
+
+              <div class="field checkbox">
+                <input id="consent" name="consent" type="checkbox" required />
+                <label for="consent">I consent to display my review on the website. PLEASE NOTE THAT YOU CANNOT EDIT/DELETE REVIEW! <span class="req">*</span></label>
+              </div>
+
+              <button type="submit" class="btn">Submit review</button>
+              <p id="formMsg" class="form-msg" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+        </main>
+      </div>
+      <footer class="site-footer">
+        © <span id="year"></span> Baki Photography — All rights reserved.
+        </footer>
+
+
+    </div>
+
+    <!-- Template for list items (admin delete appears when logged in) -->
+    <template id="reviewTemplate">
+      <li class="review-card">
+        <header class="review-head">
+          <div class="reviewer"></div>
+          <div class="meta">
+            <div class="stars-read" aria-label=""></div>
+            <div class="type-date"></div>
+          </div>
+        </header>
+        <p class="review-text"></p>
+        <div class="admin-row" hidden>
+          <button class="tiny-btn danger delete-btn" type="button">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+      (function () {
+        const STORAGE_KEY = "baki_reviews_v1";
+        const ADMIN_FLAG = "baki_is_admin"; // sessionStorage flag
+        // Default passcode = "baki-admin-2025" (SHA-256 below)
+        const PASSCODE_HASH = "df940bf66469dadd0a604bb62eee71a2eddcab2cfef5390c6ea9519878569cc0";
+
+        // Tabs
+        const tabs = {
+          listBtn: document.getElementById("tab-list"),
+          formBtn: document.getElementById("tab-form"),
+          listPanel: document.getElementById("panel-list"),
+          formPanel: document.getElementById("panel-form"),
+        };
+        function activateTab(which) {
+          const isList = which === "list";
+          tabs.listBtn.classList.toggle("is-active", isList);
+          tabs.formBtn.classList.toggle("is-active", !isList);
+          tabs.listBtn.setAttribute("aria-selected", isList);
+          tabs.formBtn.setAttribute("aria-selected", !isList);
+          tabs.listBtn.setAttribute("tabindex", isList ? "0" : "-1");
+          tabs.formBtn.setAttribute("tabindex", !isList ? "0" : "-1");
+          tabs.listPanel.classList.toggle("is-active", isList);
+          tabs.formPanel.classList.toggle("is-active", !isList);
+          tabs.listPanel.toggleAttribute("aria-hidden", !isList);
+          tabs.formPanel.toggleAttribute("aria-hidden", isList);
+        }
+        tabs.listBtn.addEventListener("click", () => activateTab("list"));
+        tabs.formBtn.addEventListener("click", () => activateTab("form"));
+
+        // Filters & list
+        const filterType = document.getElementById("filterType");
+        const filterRating = document.getElementById("filterRating");
+        const sortBy = document.getElementById("sortBy");
+        const searchText = document.getElementById("searchText");
+        const reviewsList = document.getElementById("reviewsList");
+        const emptyState = document.getElementById("emptyState");
+        const template = document.getElementById("reviewTemplate");
+
+        // Form
+        const form = document.getElementById("reviewForm");
+        const formMsg = document.getElementById("formMsg");
+        const ratingLive = document.getElementById("ratingLive");
+        const ratingRadios = Array.from(form.querySelectorAll('input[name="rating"]'));
+        ratingRadios.forEach(r => r.addEventListener("change", () => {
+          ratingLive.textContent = `Selected ${r.value} star${r.value === "1" ? "" : "s"}.`;
+        }));
+
+        // Admin UI
+        const adminBtn = document.getElementById("adminBtn");
+        const adminBadge = document.getElementById("adminBadge");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        const fmtDate = (iso) => new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        const starsStr = (n) => "★".repeat(n) + "☆".repeat(5 - n);
+        const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+        function normalizeAndSaveIds(list){
+          let changed = false;
+          for (const r of list) {
+            if (!r.id) { r.id = uid(); changed = true; }
+          }
+          if (changed) saveReviews(list);
+          return list;
+        }
+
+        function loadReviews() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const data = raw ? JSON.parse(raw) : null;
+            if (Array.isArray(data)) return normalizeAndSaveIds(data);
+          } catch {}
+          const seed = [
+            { id: uid(), name: "Alyssa M.", shootType: "Engagement", rating: 5, message: "Stunning photos and super friendly! We felt comfortable the whole time.", createdAt: new Date(Date.now() - 1000*60*60*24*7).toISOString() },
+            { id: uid(), name: "Jamal R.", shootType: "Event", rating: 4, message: "Great candids and attention to detail. Turnaround was fast too.", createdAt: new Date(Date.now() - 1000*60*60*24*20).toISOString() }
+          ];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
+          return seed;
+        }
+        function saveReviews(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+        let REVIEWS = loadReviews();
+
+        function applyFilters(list){
+          const t = filterType.value;
+          const min = Number(filterRating.value);
+          const q = searchText.value.trim().toLowerCase();
+
+          let out = list.filter(r => {
+            const okType = (t === "all" || r.shootType === t);
+            const okRating = r.rating >= min;
+            const okSearch = !q || r.name.toLowerCase().includes(q) || r.message.toLowerCase().includes(q);
+            return okType && okRating && okSearch;
+          });
+
+          switch (sortBy.value) {
+            case "newest": out.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)); break;
+            case "oldest": out.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)); break;
+            case "highest": out.sort((a,b) => b.rating - a.rating || new Date(b.createdAt) - new Date(a.createdAt)); break;
+            case "lowest": out.sort((a,b) => a.rating - b.rating || new Date(b.createdAt) - new Date(a.createdAt)); break;
+          }
+          return out;
+        }
+
+        function isAdmin(){ return sessionStorage.getItem(ADMIN_FLAG) === "1"; }
+        function setAdmin(on){
+          if (on) sessionStorage.setItem(ADMIN_FLAG, "1");
+          else sessionStorage.removeItem(ADMIN_FLAG);
+          adminBadge.hidden = !on;
+          logoutBtn.hidden = !on;
+          adminBtn.hidden = on;
+          paint();
+        }
+
+        async function hashText(text){
+          const data = new TextEncoder().encode(text);
+          const digest = await crypto.subtle.digest("SHA-256", data);
+          return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,"0")).join("");
+        }
+
+        adminBtn.addEventListener("click", async () => {
+          const input = prompt("Enter admin passcode:");
+          if (!input) return;
+          try {
+            const h = await hashText(input.trim());
+            if (h === PASSCODE_HASH) {
+              setAdmin(true);
+              alert("Admin mode enabled.");
+            } else {
+              alert("you really thought thats the passcode?");
+            }
+          } catch {
+            alert("This browser does not support the required crypto features.");
+          }
+        });
+        logoutBtn.addEventListener("click", () => setAdmin(false));
+
+        function paint(){
+          reviewsList.setAttribute("aria-busy","true");
+          reviewsList.innerHTML = "";
+          const data = applyFilters(REVIEWS);
+          const admin = isAdmin();
+
+          if (data.length === 0) {
+            emptyState.hidden = false;
+            reviewsList.setAttribute("aria-busy","false");
+            return;
+          }
+          emptyState.hidden = true;
+
+          const frag = document.createDocumentFragment();
+          for (const r of data) {
+            const node = template.content.cloneNode(true);
+            node.querySelector(".reviewer").textContent = r.name;
+            const s = node.querySelector(".stars-read");
+            s.textContent = starsStr(r.rating);
+            s.setAttribute("aria-label", `${r.rating} out of 5 stars`);
+            node.querySelector(".type-date").textContent = `${r.shootType} • ${fmtDate(r.createdAt)}`;
+            node.querySelector(".review-text").textContent = r.message;
+
+            // Show delete when admin
+            const adminRow = node.querySelector(".admin-row");
+            if (admin) {
+              adminRow.hidden = false;
+              const del = adminRow.querySelector(".delete-btn");
+              del.addEventListener("click", () => {
+                if (!confirm("Delete this review?")) return;
+                const idx = REVIEWS.findIndex(x => x.id === r.id);
+                if (idx !== -1) {
+                  REVIEWS.splice(idx, 1);
+                  saveReviews(REVIEWS);
+                  paint();
+                }
+              });
+            }
+
+            frag.appendChild(node);
+          }
+          reviewsList.appendChild(frag);
+          reviewsList.setAttribute("aria-busy","false");
+        }
+
+        [filterType, filterRating, sortBy].forEach(el => el.addEventListener("change", paint));
+        searchText.addEventListener("input", paint);
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          formMsg.textContent = "";
+
+          const fd = new FormData(form);
+          const name = (fd.get("name") || "").toString().trim();
+          const shootType = fd.get("shootType");
+          const rating = Number(fd.get("rating"));
+          const message = (fd.get("message") || "").toString().trim();
+          const consent = fd.get("consent") === "on";
+
+          if (!name || !shootType || !rating || !message || !consent) {
+            formMsg.textContent = "Please complete all required fields.";
+            formMsg.classList.add("error");
+            return;
+          }
+          if (message.length < 10) {
+            formMsg.textContent = "Please write at least 10 characters.";
+            formMsg.classList.add("error");
+            return;
+          }
+
+          const review = { id: uid(), name, shootType, rating, message, createdAt: new Date().toISOString() };
+          REVIEWS.unshift(review);
+          saveReviews(REVIEWS);
+          paint();
+
+          form.reset();
+          ratingLive.textContent = "";
+          formMsg.textContent = "Thanks! Your review has been added.";
+          formMsg.classList.remove("error");
+          formMsg.classList.add("success");
+
+          activateTab("list");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // restore admin state on reload
+        setAdmin(isAdmin());
+        paint();
+
+        [tabs.listBtn, tabs.formBtn].forEach(btn => {
+          btn.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+              const next = btn === tabs.listBtn ? tabs.formBtn : tabs.listBtn;
+              next.focus(); next.click();
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

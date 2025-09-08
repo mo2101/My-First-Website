@@ -14,6 +14,8 @@
                 <li><a href="videos.html">Videos</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="booking.html">booking</a></li>
+                <li><a href="review.html">Review</a></li>
+
             </ul>
         </div>
         <div class="content">
@@ -24,7 +26,15 @@
                 <source src="airplane1.webm" type="video/webm">
                 Your browser does not support the video tag.
              </video>
-        </div> 
-    </div>        
+        </div>
+        <footer class="site-footer">
+            © <span id="year"></span> Baki Photography — All rights reserved.
+        </footer>
+ 
+    </div>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
     </body>
 </html>
