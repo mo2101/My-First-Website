@@ -82,8 +82,9 @@
   flex-wrap: wrap;
   gap: 15px;
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
   justify-content: center;
+  margin-bottom: 200px;
 }
 
 .card {
@@ -218,4 +219,10 @@
   padding: 6px 10px; /* subtle contrast on busy photos */
   backdrop-filter: blur(4px);
   z-index: 50;
+}
+/* Responsive fallback for mobile */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+  }
 }

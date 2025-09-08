@@ -3,6 +3,28 @@
 <head>
     <title>Photos | Baki Photography</title>
     <link rel="stylesheet" href="css/cars.css">
+    <!-- Mobile tap-to-zoom overrides -->
+    <style>
+      /* Zoom via class on touch devices */
+      .card.active{
+        transform: scale(1.6);
+        z-index: 3;
+      }
+      /* If you have captions via ::after, show them when active */
+      .card.active::after{ opacity: 1; }
+
+      /* On touch, ignore hover-based zoom/blur from the external CSS */
+      .cards.touch-active .card:hover{ transform: none !important; }
+      .cards.touch-active > .card:not(.active){
+        filter: blur(2px);
+        transform: scale(0.92);      /* no unintended scaling */
+      }
+
+      /* Optional: make the zoom a bit smaller on small screens */
+      @media (max-width: 600px){
+        .card.active{ transform: scale(1.35); }
+      }
+    </style>
 </head>
 <body>
     <div class="banner" loading="lazy">
@@ -21,26 +43,26 @@
             <h1>CARS</h1>
         </div>
             <div class="cards">
-                <div class="card" style="background-image: url('../pics/small/bmw-small.jpg');" data-bg="../pics/bmw.jpg" data-caption="BMW Front" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/challengerblue-small.JPG');" data-bg="../pics/challengerblue.jpg" data-caption="Blue Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/ycar-small.JPG');" data-bg="../pics/ycar.jpg" data-caption="Yellow Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/oldblue-small.JPG');" data-bg="../pics/oldblue.jpg" data-caption="Old Blue Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/mar-small.JPG');" data-bg="../pics/mar.jpg" data-caption="Maroon" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/marback-small.JPG');" data-bg="../pics/marback.jpg" data-caption="Maroon Rear" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/marfront-small.JPG');" data-bg="../pics/marfront.jpg" data-caption="Maroon Front" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/yidk-small.JPG');" data-bg="../pics/yidk.jpg" data-caption="Unknown Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bmw-small.jpg');" data-bg="../pics/bmw.jpg" data-caption="BMW" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/challengerblue-small.JPG');" data-bg="../pics/challengerblue.jpg" data-caption="Challenger" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/ycar-small.JPG');" data-bg="../pics/ycar.jpg" data-caption="antique" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/oldblue-small.JPG');" data-bg="../pics/oldblue.jpg" data-caption="antique" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/mar-small.JPG');" data-bg="../pics/mar.jpg" data-caption="AMG" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/marback-small.JPG');" data-bg="../pics/marback.jpg" data-caption="AMG" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/marfront-small.JPG');" data-bg="../pics/marfront.jpg" data-caption="AMG" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/yidk-small.JPG');" data-bg="../pics/yidk.jpg" data-caption="Corvette" loading="lazy"></div>
                 <div class="card" style="background-image: url('../pics/small/bporsche-small.JPG');" data-bg="../pics/porsche.jpeg" data-caption="Porsche" loading="lazy"></div>
                 <div class="card" style="background-image: url('../pics/small/jsrt-small.JPG');" data-bg="../pics/rsrt.jpg" data-caption="SRT" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/bmwb-small.JPG');" data-bg="../pics/bmwb.jpg" data-caption="BMW B" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/wporsche-small.JPG');" data-bg="../pics/wporsche.jpg" data-caption="White Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/rsrt-small.JPG');" data-bg="../pics/srt.jpeg" data-caption="Red SRT" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bmwb-small.JPG');" data-bg="../pics/bmwb.jpg" data-caption="BMW" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/wporsche-small.JPG');" data-bg="../pics/wporsche.jpg" data-caption="Porsche" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/rsrt-small.JPG');" data-bg="../pics/srt.jpeg" data-caption="SRT" loading="lazy"></div>
                 <div class="card" style="background-image: url('../pics/small/ycorvette-small.JPG');" data-bg="../pics/ycorvette.jpg" data-caption="Corvette" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/salem-small.JPG');" data-bg="../pics/salem.jpg" data-caption="Salem Bike" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/wchallenger-small.JPG');" data-bg="../pics/wchallenger.jpg" data-caption="White Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/oldwcar-small.jpg');" data-bg="../pics/oldwcar.jpg" data-caption="Old White Car" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/bprosche-small.JPG');" data-bg="../pics/bprosche.jpeg" data-caption="Black Porsche" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/salem-small.JPG');" data-bg="../pics/salem.jpg" data-caption="Bike" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/wchallenger-small.JPG');" data-bg="../pics/wchallenger.jpg" data-caption="Challenger" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/oldwcar-small.jpg');" data-bg="../pics/oldwcar.jpg" data-caption="antique" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/bprosche-small.JPG');" data-bg="../pics/bprosche.jpeg" data-caption="Porsche" loading="lazy"></div>
                 <div class="card" style="background-image: url('../pics/small/lambo-small.JPG');" data-bg="../pics/lambo.jpeg" data-caption="Lamborghini" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/challenge-small.JPG');" data-bg="../pics/challenge.jpg" data-caption="Challenge Car" loading="lazy"></div>
+                <div class="card" style="background-image: url('../pics/small/challenge-small.JPG');" data-bg="../pics/challenge.jpg" data-caption="Challenger" loading="lazy"></div>
             </div>
         </div>
         <footer class="site-footer">
@@ -48,11 +70,14 @@
         </footer>
 
     </div>
+
+    <!-- Progressive background swap -->
     <script>
         // Swap blurred small background with full image once loaded
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".card").forEach(card => {
                 const highRes = card.getAttribute("data-bg");
+                if (!highRes) return;
                 const img = new Image();
                 img.src = highRes;
                 img.onload = () => {
@@ -60,7 +85,51 @@
                     card.classList.add("loaded");
                 };
             });
+
+            // Footer year
+            const y = document.getElementById('year');
+            if (y) y.textContent = new Date().getFullYear();
         });
+    </script>
+
+    <!-- Tap-to-zoom for mobile -->
+    <script>
+      (function () {
+        const isTouch =
+          window.matchMedia && window.matchMedia('(pointer: coarse)').matches ||
+          'ontouchstart' in window;
+
+        const cardsWrap = document.querySelector('.cards');
+        const cards = document.querySelectorAll('.card');
+        if (!cardsWrap || !cards.length) return;
+
+        if (isTouch) {
+          // Mark container so CSS switches behavior
+          cardsWrap.classList.add('touch-active');
+
+          // Tap a card to toggle zoom
+          cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+              const wasActive = card.classList.contains('active');
+              // close others
+              cards.forEach(c => c.classList.remove('active'));
+              // toggle this one
+              if (!wasActive) card.classList.add('active');
+              e.stopPropagation();
+            }, { passive: true });
+          });
+
+          // Tap outside to close
+          document.addEventListener('click', () => {
+            cards.forEach(c => c.classList.remove('active'));
+          }, { passive: true });
+
+          // Close on ESC (if keyboard)
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') cards.forEach(c => c.classList.remove('active'));
+          });
+        }
+      })();
     </script>
 
 </body>
