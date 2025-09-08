@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="css/videos.css">
   <style>
-    :root{
-      --brand:#ff8a00; --ink:#111; --muted:#666; --bg:#f6f6f6;
-    }
+    :root{ --brand:#ff8a00; --ink:#111; --muted:#666; --bg:#f6f6f6; }
     html,body{margin:0;background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../pics/background.JPEG);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
     .wrap{max-width:960px;margin:0 auto;padding:20px}
     header{display:flex;align-items:center;gap:12px;padding:12px 0;justify-content: space-between;}
@@ -30,10 +28,14 @@
     .btn.secondary{background:#fff;color:var(--ink);border:1px solid #ddd}
     form{display:grid;gap:12px}
     label{font-size:13px;color:#fff}
-    input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:16px;background-color: #252525;}
+    input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:16px;background-color: #252525;color:#fff}
     textarea{min-height:110px;resize:vertical}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
     .empty{padding:12px;color:var(--muted)}
+    .site-footer{margin-top:24px;color:#fff;opacity:.9;text-align:center;padding-bottom:24px}
+    .msg{margin-top:12px;font-weight:700;display:none}
+    .msg.ok{color:#b8ffb3}
+    .msg.err{color:#ffb3b3}
   </style>
 </head>
 <body>
@@ -57,33 +59,32 @@
         <div class="row total"><span>Total</span><span id="tot">$0</span></div>
       </section>
 
-      <!-- Booking Form -->
+      <!-- Booking Form (Formspree) -->
       <section class="card">
         <h2 style="margin:0 0 12px">Your Details</h2>
 
-        <!-- Netlify Forms: it will capture submissions automatically on Netlify -->
-        <form name="baki-checkout" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <!-- If not on Netlify, you can use Formspree:
-               <form action="https://formspree.io/f/your-id" method="POST">
-          -->
-          <input type="hidden" name="form-name" value="baki-checkout">
-          <input type="hidden" name="cart_json" id="cart_json" value="{}">
-
-          <p style="display:none">
-            <label>Don’t fill this out: <input name="bot-field" /></label>
-          </p>
+        <!-- Your Formspree endpoint -->
+        <form id="bookingForm"
+              action="https://formspree.io/f/mandaryp"
+              method="POST">
+          <input type="hidden" name="_subject" value="New Photoshoot Booking Request" />
+          <input type="hidden" name="_replyto" id="fs_replyto" value="" />
+          <!-- This is what Formspree will email (clean invoice text) -->
+          <input type="hidden" name="invoice" id="invoice_text" />
+          <!-- Keep JSON for JS only (NOT emailed, no name attr) -->
+          <input type="hidden" id="cart_json" value="{}">
 
           <div>
             <label for="name">Full Name</label>
-            <input id="name" name="name" required />
+            <input id="name" name="name" required autocomplete="name" />
           </div>
           <div>
             <label for="email">Email</label>
-            <input id="email" type="email" name="email" required />
+            <input id="email" type="email" name="email" required autocomplete="email" />
           </div>
           <div>
             <label for="phone">Phone</label>
-            <input id="phone" name="phone" />
+            <input id="phone" name="phone" autocomplete="tel" />
           </div>
           <div>
             <label for="date">Preferred Date</label>
@@ -95,87 +96,164 @@
           </div>
           <div>
             <label for="notes">Notes / Location / Special Requests</label>
-            <textarea id="notes" name="notes" placeholder="Tell me about the session you want…"></textarea>
+            <textarea id="notes" name="notes"></textarea>
           </div>
 
           <div class="actions">
-            <button class="btn" type="submit">Request Booking</button>
+            <button id="payBtn" class="btn" type="submit">Pay & Book</button>
             <a class="btn secondary" href="booking.html">Edit Selection</a>
           </div>
+          <div id="ok" class="msg ok">Thank you for your submission, Note (We will reach out to you about payment options soon!) </div>
+          <div id="err" class="msg err"></div>
         </form>
       </section>
     </div>
+
     <footer class="site-footer">
       © <span id="year"></span> Baki Photography — All rights reserved.
     </footer>
-
   </div>
 
   <script>
-    // Read cart from localStorage (saved by your pictures page)
+    // --- Cart helpers ---
     const CART_KEY = 'bkCart';
-
-    function readCart(){
-      try{
-        const raw = localStorage.getItem(CART_KEY);
-        if(!raw) return {};
-        return JSON.parse(raw) || {};
-      }catch(e){ return {}; }
+    function readCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY))||{} }catch(e){return{}} }
+    function toList(o){ return Object.values(o||{}) }
+    function money(n){ return '$' + Number(n||0).toFixed(2) }
+    function computeTotals(){
+      const list = toList(readCart());
+      const sub = list.reduce((s,i)=>s + Number(i.price)*Number(i.qty), 0);
+      const taxRate = 0.075;
+      const tax = sub * taxRate; 
+      const tot = sub + tax;
+      return { list, sub, tax, tot };
     }
-
-    function toList(itemsObj){ return Object.values(itemsObj || {}); }
-    function money(n){ return '$' + (n||0).toFixed(2); }
-
     function render(){
-      const itemsObj = readCart();
-      const list = toList(itemsObj);
-
-      const itemsEl = document.getElementById('items');
-      const emptyEl = document.getElementById('empty');
-      const subEl = document.getElementById('sub');
-      const taxEl = document.getElementById('tax');
-      const totEl = document.getElementById('tot');
-      const hiddenCart = document.getElementById('cart_json');
-
-      itemsEl.innerHTML = '';
-      if(list.length === 0){
-        emptyEl.style.display = 'block';
-      }else{
-        emptyEl.style.display = 'none';
-        list.forEach(i => {
-          const row = document.createElement('div');
-          row.className = 'line';
-          row.innerHTML = `
-            <img src="${i.img}" alt="">
-            <div>
-              <div class="title">${i.title}</div>
-              <div class="muted">$${i.price} each × ${i.qty}</div>
-            </div>
-            <div class="right"><strong>${money(i.price * i.qty)}</strong></div>
-          `;
+      const {list,sub,tax,tot}=computeTotals();
+      const itemsEl=document.getElementById('items');
+      const emptyEl=document.getElementById('empty');
+      itemsEl.innerHTML='';
+      if(list.length===0){ emptyEl.style.display='block'; }
+      else {
+        emptyEl.style.display='none';
+        list.forEach(i=>{
+          const row=document.createElement('div');
+          row.className='line';
+          row.innerHTML=`<img src="${i.img}" alt="">
+            <div><div class="title">${i.title}</div>
+            <div class="muted">$${Number(i.price).toFixed(2)} × ${i.qty}</div></div>
+            <div class="right"><strong>${money(Number(i.price)*Number(i.qty))}</strong></div>`;
           itemsEl.appendChild(row);
         });
       }
+      document.getElementById('sub').textContent=money(sub);
+      document.getElementById('tax').textContent=money(tax);
+      document.getElementById('tot').textContent=money(tot);
 
-      const sub = list.reduce((s,i)=>s + i.price*i.qty, 0);
-      const tax = 0; // set your real tax logic here if needed
-      const tot = sub + tax;
-
-      subEl.textContent = money(sub);
-      taxEl.textContent = money(tax);
-      totEl.textContent = money(tot);
-
-      // Send full cart payload with the form
-      hiddenCart.value = JSON.stringify({
-        items: list.map(i => ({ id:i.id, title:i.title, price:i.price, qty:i.qty })),
+      // Keep compact JSON in the page (not emailed)
+      const cartPayload = {
+        items: list.map(i => ({ id:i.id, title:i.title, price:Number(i.price), qty:Number(i.qty) })),
         totals: { subtotal: sub, tax, total: tot }
-      });
+      };
+      const cj = document.getElementById('cart_json');
+      if (cj) cj.value = JSON.stringify(cartPayload);
+    }
+    render();
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    // --- AJAX Formspree submit ---
+    const form = document.getElementById('bookingForm');
+    const okEl = document.getElementById('ok');
+    const errEl = document.getElementById('err');
+    const payBtn = document.getElementById('payBtn');
+
+    function showErr(msg){
+      errEl.textContent = msg || 'Something went wrong.';
+      errEl.style.display = 'block';
+      okEl.style.display = 'none';
+    }
+    function showOk(){
+      errEl.style.display = 'none';
+      okEl.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    render();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const {list,sub,tax,tot}=computeTotals();
+      if(!list.length){ return showErr('Your cart is empty.'); }
+
+      const name  = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name || !email){ return showErr('Name and email required.'); }
+
+      // Build clean invoice text
+      const phone = document.getElementById('phone').value.trim();
+      const d     = document.getElementById('date').value;
+      const t     = document.getElementById('time').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      const lines = [];
+      lines.push('Baki Photography — Booking Request');
+      lines.push(`Name: ${name}`);
+      lines.push(`Email: ${email}`);
+      if (phone) lines.push(`Phone: ${phone}`);
+      if (d)     lines.push(`Preferred Date: ${d}`);
+      if (t)     lines.push(`Preferred Time: ${t}`);
+      if (notes) lines.push(`Notes: ${notes}`);
+      lines.push('');
+      lines.push('Items:');
+      list.forEach(i=>{
+        const lineTotal = Number(i.price)*Number(i.qty);
+        lines.push(`• ${i.title} — $${Number(i.price).toFixed(2)} × ${i.qty} = ${money(lineTotal)}`);
+      });
+      lines.push('');
+      lines.push(`Subtotal: ${money(sub)}`);
+      lines.push(`Tax: ${money(tax)}`);
+      lines.push(`Total: ${money(tot)}`);
+
+      // >>> Ensure invoice field is populated for FormData
+      const invoiceField = document.getElementById('invoice_text');
+      const invoiceBody  = lines.join('\n');
+      invoiceField.value = invoiceBody;
+      invoiceField.setAttribute('value', invoiceBody); // extra-safe for some browsers
+
+      // Set reply-to for convenience
+      document.getElementById('fs_replyto').value = email;
+
+      // Disable button while sending
+      payBtn.disabled = true;
+      payBtn.textContent = 'Sending...';
+
+      try{
+        const data = new FormData(form);
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (resp.ok) {
+          showOk();
+          // hide actions after success
+          const actions = form.querySelector('.actions');
+          if (actions) actions.style.display = 'none';
+          // clear form & cart
+          form.reset();
+          try { localStorage.removeItem(CART_KEY); } catch {}
+          render();
+        } else {
+          showErr('Submission failed. Please try again.');
+        }
+      } catch (err) {
+        console.error(err);
+        showErr('Network error. Please try again.');
+      } finally {
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay & Book';
+      }
+    });
   </script>
-  <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>

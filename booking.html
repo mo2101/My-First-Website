@@ -299,7 +299,8 @@
       list(){ return Object.values(this.items); },
       totals(){
         const sub = this.list().reduce((s,i)=>s+i.price*i.qty,0);
-        const tax = 0; // hook your real tax here
+        const taxRate = 0.075;
+        const tax = sub * taxRate; 
         return { sub, tax, total: sub + tax };
       },
       _changed(){
