@@ -1,3 +1,9 @@
+html, body {
+  width: 100%;
+  overflow-x: hidden;          /* no horizontal gutter on iOS */
+  -webkit-text-size-adjust: 100%;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -82,9 +88,10 @@
   flex-wrap: wrap;
   gap: 15px;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 200px;
   justify-content: center;
-  margin-bottom: 200px;
+  overflow: visible;           /* let the enlarged card spill without scrollbars */
+  isolation: isolate;          /* its own stacking context (helps z-index) */
 }
 .site-footer{
   position: fixed;            /* stays at the bottom even when scrolling */
@@ -110,9 +117,11 @@
   background-position: center;
   position: relative;
   cursor: pointer;
-  transition: transform 0.4s ease;
+  transition: transform 0.35s ease, filter 0.2s ease;
   z-index: 1;
   overflow: hidden;
+  transform-origin: center center;   /* grow from the center (less “push”) */
+  will-change: transform;
 }
 
 /* Zoom on hover */
@@ -155,4 +164,20 @@
   .card {
     flex: 1 1 100%;
   }
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: scale(1.8);     /* slightly less aggressive than 2 = fewer overflows */
+    z-index: 2;
+  }
+  .cards:hover > .card:not(:hover) {
+    filter: blur(2px);
+    transform: scale(0.92);
+  }
+}
+
+/* On touch devices, don't use sticky :hover */
+@media (hover: none) {
+  .card:hover { transform: none; }
+  .cards:hover > .card:not(:hover) { filter: none; transform: none; }
 }
