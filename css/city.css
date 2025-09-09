@@ -1,3 +1,9 @@
+html, body {
+  width: 100%;
+  overflow-x: hidden;          /* no horizontal gutter on iOS */
+  -webkit-text-size-adjust: 100%;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -34,6 +40,7 @@
   cursor: pointer;
 }
 
+
 .navbar ul li {
   display: inline-block;
   margin: 0 20px;
@@ -61,20 +68,19 @@
 .navbar ul li:hover::after {
   width: 100%;
 }
-
 .contentone {
-  width: 100%;
-  text-align: center;
-  margin: auto; /* Center vertically */
-  color: #fff;
-  font-size: 250%;
-  margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+    margin: auto; /* Center vertically */
+    color: #fff;
+    font-size: 250%;
+    margin-bottom: 15px;
 }
 
 .contentone h1 {
-  font-size: 100px;
-  margin: 10px 0;
-  padding: auto;
+    font-size: 100px;
+    margin: 10px 0;
+    padding: auto;
 }
 
 .cards {
@@ -82,41 +88,55 @@
   flex-wrap: wrap;
   gap: 15px;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 200px;
   justify-content: center;
-  margin-bottom: 200px;
+  overflow: visible;           /* let the enlarged card spill without scrollbars */
+  isolation: isolate;          /* its own stacking context (helps z-index) */
+}
+.site-footer{
+  position: fixed;            /* stays at the bottom even when scrolling */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(12px, env(safe-area-inset-bottom)); /* friendly on iPhone notch */
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: .3px;
+  opacity: .85;
+  padding: 6px 10px; /* subtle contrast on busy photos */
+  backdrop-filter: blur(4px);
+  z-index: 50;
 }
 
 .card {
   flex: 1 1 calc(33.333% - 30px);
   min-width: 200px;
   max-width: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 350px;
   border-radius: 10px;
-  cursor: pointer;
-  transition: transform 400ms ease;
   background-size: cover;
   background-position: center;
-  position: relative; /* Required for caption positioning */
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s ease, filter 0.2s ease;
   z-index: 1;
+  overflow: hidden;
+  transform-origin: center center;   /* grow from the center (less “push”) */
+  will-change: transform;
 }
 
-/* Hover zoom effect */
+/* Zoom on hover */
 .card:hover {
   transform: scale(2);
   z-index: 2;
 }
 
-/* Blur effect on non-hovered cards */
+/* Blur other cards */
 .cards:hover > .card:not(:hover) {
-  filter: blur(0px);
+  filter: blur(2px);
   transform: scale(0.9);
 }
 
-/* Caption on hover from data-caption */
+/* Hover text from data-caption */
 .card::after {
   content: attr(data-caption);
   position: absolute;
@@ -132,92 +152,32 @@
   pointer-events: none;
   font-size: 14px;
   white-space: nowrap;
+  text-align: center;
 }
 
 .card:hover::after {
   opacity: 1;
 }
 
+/* Responsive fallback for mobile */
 @media (max-width: 768px) {
-  .banner {
-      background-size: cover; /* Cover the entire section */
-  }
-  
-  .navbar ul {
-      gap: 10px;
-  }
-
-  .content h1 {
-      font-size: 40px;
-      padding: auto;
-  }
-
-  .content p {
-      font-size: 16px;
-  }
-
-  button {
-      width: 160px;
-      padding: 10px 0;
+  .card {
+    flex: 1 1 100%;
   }
 }
-
-/* Adjustments for mobile screens */
-@media (max-width: 600px) {
-  .navbar {
-      flex-direction: column;
-      align-items: center;
-      padding: 5% 0;
-      height: 350px;
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: scale(1.8);     /* slightly less aggressive than 2 = fewer overflows */
+    z-index: 2;
   }
-
-  .navbar ul {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-  }
-
-  .signature {
-      width: 120px;
-  }
-
-  .content h1 {
-      font-size: 30px;
-      padding: auto;
-  }
-
-  .content p {
-      font-size: 14px;
-  }
-
-  button {
-      width: 150px;
-      padding: 8px 0;
-  }
-  .cards{
-      min-width: 180px;
-  }
-  .cards .card:hover {
-      transform: scale(1.3);
-      z-index: 2;
-      position: relative;
-  }
-  
   .cards:hover > .card:not(:hover) {
-      filter: blur(0px);
-      transform: scale(0.9);
+    filter: blur(2px);
+    transform: scale(0.92);
   }
 }
-.site-footer{
-  position: fixed;            /* stays at the bottom even when scrolling */
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: max(12px, env(safe-area-inset-bottom)); /* friendly on iPhone notch */
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: .3px;
-  opacity: .85;
-  padding: 6px 10px; /* subtle contrast on busy photos */
-  backdrop-filter: blur(4px);
-  z-index: 50;
+
+/* On touch devices, don't use sticky :hover */
+@media (hover: none) {
+  .card:hover { transform: none; }
+  .cards:hover > .card:not(:hover) { filter: none; transform: none; }
 }
