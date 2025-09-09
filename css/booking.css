@@ -403,6 +403,7 @@ html, body {
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
   margin: 15px;
+  padding-bottom: 15px;
 }
 .sections h1{
   text-align: center;
