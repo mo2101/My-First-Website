@@ -394,5 +394,15 @@ html, body {
   backdrop-filter: blur(4px);
   z-index: 50;
 }
-
-
+.sections{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sections h1{
+  text-align: center;
+}
+.sections li{
+  padding: 4.5px;
+}

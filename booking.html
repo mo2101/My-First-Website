@@ -20,7 +20,7 @@
       --bk-dark: #111;
       --bk-light: #fff;
     }
-    .bk-carousel-wrap{display:grid;place-items:center;padding:24px 0 120px; width:100%;}
+    .bk-carousel-wrap{display:grid;place-items:center;padding:24px 0 50px; width:100%;}
     .bk-carousel{width:min(100%,1180px);padding:24px 16px 56px;position:relative}
     .bk-stage{position:relative;height:var(--bk-card-h);perspective:1200px;overflow:visible;touch-action:pan-y}
     .bk-card{position:absolute;top:0;left:50%;width:var(--bk-card-w);height:var(--bk-card-h);border-radius:28px;transform-origin:center bottom;background:#222 center/cover no-repeat;box-shadow:0 20px 60px rgba(0,0,0,.25);transition:transform var(--bk-anim),opacity var(--bk-anim),filter var(--bk-anim),z-index var(--bk-anim);will-change:transform,opacity,filter;user-select:none;overflow:hidden}
@@ -155,6 +155,96 @@
         </a>
       </footer>
     </aside>
+    <div class="Breakdown">
+      <H1 style="text-align: center;">Full Minimal Price Breakdown</H1>
+    </div>
+    <div class="sections">
+      <div class="ecars"> 
+        <h1 style="padding: 20px;">Cars</h1>
+        <ul>
+          <li>Ability to choose or request location</li>
+          <li>Duration 1–3 hours</li>
+          <li>Professional lighting setup (if needed)</li>
+          <li>10–20 edited photos guaranteed</li>
+          <li>Digital or physical photo delivery</li>
+          <li>Highlight shots of full car + detail close-ups</li>
+        </ul>
+      </div>
+
+      <div class="eWeddings"> 
+        <h1 style="padding: 20px;">Weddings</h1>
+        <ul>
+          <li>Pre-shoot consultation & location planning</li>
+          <li>Coverage 3–6 hours (ceremony + reception)</li>
+          <li>50+ fully edited high-resolution photos</li>
+          <li>Digital gallery + option for physical album</li>
+          <li>Candid moments, group portraits, and detail shots</li>
+          <li>Turnaround: 2–3 weeks</li>
+        </ul>
+      </div>
+
+      <div class="eengagement"> 
+        <h1 style="padding: 20px;">Engagement</h1>
+        <ul>
+          <li>Ability to choose or request location</li>
+          <li>Duration 3-5 hours</li>
+          <li>15–25 edited images guaranteed</li>
+          <li>Posed + candid couple shots</li>
+          <li>Digital gallery with print release</li>
+          <li>Turnaround: 1–2 weeks</li>
+        </ul>
+      </div>
+
+      <div class="eportrait"> 
+        <h1 style="padding: 20px;">Portrait</h1>
+        <ul>
+          <li>Indoor or outdoor location choice</li>
+          <li>Duration 1-2 hour session</li>
+          <li>8–12 professionally edited portraits</li>
+          <li>Basic skin/lighting retouch included</li>
+          <li>High-resolution digital files</li>
+          <li>Turnaround: 5–7 days</li>
+        </ul>
+      </div>
+
+      <div class="eparty"> 
+        <h1 style="padding: 20px;">Party</h1>
+        <ul>
+          <li>Coverage 2–4 hours</li>
+          <li>Unlimited candid photos during event</li>
+          <li>20–30 edited highlight shots</li>
+          <li>Group shots on request</li>
+          <li>Digital album delivery</li>
+          <li>Turnaround: 1–2 weeks</li>
+        </ul>
+      </div>
+
+      <div class="efamily"> 
+        <h1 style="padding: 20px;">Family</h1>
+        <ul>
+          <li>Outdoor or indoor session</li>
+          <li>Duration 1–2 hours</li>
+          <li>10–15 edited family portraits</li>
+          <li>Mix of posed and candid shots</li>
+          <li>Digital gallery + print options</li>
+          <li>Turnaround: 1–2 weeks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="extras">
+        <h1 style="padding: 20px; text-align: center;">Extra Charges & Add-Ons</h1>
+        <ul>
+          <li>📍 <strong>Travel Fee:</strong> Additional cost for locations outside a 25-mile radius.</li>
+          <li style="padding: 10px;">⏱ <strong>Extra Time:</strong> $XX per additional hour beyond the package duration.</li>
+          <li style="padding: 10px;">🖼 <strong>Additional Edited Photos:</strong> $XX per photo or bundle pricing available.</li>
+          <li style="padding: 10px;">🎞 <strong>Advanced Retouching:</strong> Skin/perfection edits beyond basic corrections.</li>
+          <li style="padding: 10px;">👥 <strong>Second Photographer:</strong> For weddings & large events (recommended for 100+ guests).</li>
+          <li style="padding: 10px;">🚀 <strong>Rush Delivery:</strong> Get photos within 3–5 days for an additional fee.</li>
+          <li style="padding: 10px;">🖼 <strong>Prints & Canvases:</strong> High-quality prints, frames, or wall art available.</li>
+        </ul>
+      </div>
+
+
 
     <div class="bk-toast" id="bkToast">Added to cart</div>
     <footer class="site-footer">
@@ -166,12 +256,12 @@
   <script>
     /* =================== DATA =================== */
     const bkItems = [
-      { id: "wed",   title: "Weddings",  price: 1499.99, img: "pics/IMG_1755.JPG" },
-      { id: "eng",   title: "Engagement", price: 1199.99, img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" },
+      { id: "wed",   title: "Weddings",  price: 1199.99, img: "pics/IMG_1755.JPG" },
+      { id: "eng",   title: "Engagement", price: 699.99, img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" },
       { id: "pizza", title: "Cars",    price: 199.99,  img: "pics/carclear.jpg" },
-      { id: "port",  title: "Portraits", price: 99.99, img: "pics/portrait/moe3.jpg" },
-      { id: "mtrn",  title: "Party",        price: 199.99, img: "pics/portrait/saif.jpg" },
-      { id: "fam",   title: "Family",     price: 349.99, img: "pics/portrait/chase.jpeg" }
+      { id: "port",  title: "Portraits", price: 149.99, img: "pics/portrait/moe3.jpg" },
+      { id: "mtrn",  title: "Party",        price: 299.99, img: "pics/portrait/saif.jpg" },
+      { id: "fam",   title: "Family",     price: 199.99, img: "pics/portrait/chase.jpeg" }
     ];
 
     /* =================== CAROUSEL =================== */
