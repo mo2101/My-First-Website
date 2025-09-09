@@ -326,6 +326,18 @@ textarea{ resize: vertical; min-height: 120px; }
   backdrop-filter: blur(4px);
   z-index: 50;
 }
+/* Admin-only controls are hidden by default */
+.admin-row { 
+  display: none; 
+}
+
+/* When admin mode is active on the page, show them */
+.admin-active .admin-row {
+  display: flex;         /* or inline-flex / block, whatever fits your layout */
+  gap: .5rem;
+  justify-content: flex-end;
+}
+
 @media (max-width: 480px) {
   .banner{
     padding-top: calc(env(safe-area-inset-top) + 12px);

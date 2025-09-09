@@ -180,7 +180,7 @@
           </div>
         </header>
         <p class="review-text"></p>
-        <div class="admin-row" hidden>
+        <div class="admin-row">
           <button class="tiny-btn danger delete-btn" type="button">Delete</button>
         </div>
       </li>
@@ -298,6 +298,7 @@
         function setAdmin(on){
           if (on) sessionStorage.setItem(ADMIN_FLAG, "1");
           else sessionStorage.removeItem(ADMIN_FLAG);
+          document.body.classList.toggle("admin-active", on);
           adminBadge.hidden = !on;
           logoutBtn.hidden = !on;
           adminBtn.hidden = on;
