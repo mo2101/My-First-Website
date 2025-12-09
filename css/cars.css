@@ -188,3 +188,36 @@ html, body {
   .card:hover { transform: none; }
   .cards:hover > .card:not(:hover) { filter: none; transform: none; }
 }
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 0;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .signature {
+    width: 120px; /* same as pictures page */
+    margin-bottom: 10px;
+  }
+
+  .navbar ul {
+    display: flex;
+    flex-direction: column;   /* stack links under logo */
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar ul li {
+    margin: 0;
+  }
+
+  .content {
+    max-width: 360px;
+    padding-top: 0;
+  }
+}

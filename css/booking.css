@@ -33,7 +33,7 @@ html, body {
   gap: 12px;
   position: relative;           /* for in-flow positioning */
   padding-top: max(12px, env(safe-area-inset-top));
-  padding-bottom: 24px;
+  padding-bottom: 75px;
 }
 
 @media (max-width: 480px) {
@@ -84,24 +84,39 @@ html, body {
 .navbar ul li:hover::after { width: 100%; }
 
 /* Phone / small screens: allow graceful wrapping without changing look */
-@media (max-width: 600px){
-  .navbar{
-    width: calc(100% - 32px);
+/* Make BOOKING navbar behave like PICTURES on mobile */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 0;
+    width: 100%;
     max-width: 420px;
-    flex-wrap: wrap;    /* logo + menu can break line if needed */
-    row-gap: 8px;
-    justify-content: center;
   }
-  .signature{
-    width: clamp(120px, 28vw, 150px); /* scale logo slightly on small phones */
+
+  .signature {
+    width: 120px; /* same as pictures page */
+    margin-bottom: 10px;
   }
-  .navbar ul{
+
+  .navbar ul {
     display: flex;
-    flex-wrap: wrap;    /* allow 2nd line for menu items */
-    gap: 10px 14px;
-    justify-content: center;
+    flex-direction: column;   /* stack links under logo */
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
   }
-  .navbar ul li{ margin: 0; } /* gap replaces li margins */
+
+  .navbar ul li {
+    margin: 0;
+  }
+
+  .content {
+    max-width: 360px;
+    padding-top: 0;
+  }
 }
 
 /* ============ CONTENT HEADER (page title) ============ */
@@ -410,4 +425,11 @@ html, body {
 }
 .sections li{
   padding: 4.5px;
+}
+@media (max-width: 768px) {
+  .banner {
+    background-position: center top;
+    height: auto;
+    padding-bottom: 75px;
+  }
 }
