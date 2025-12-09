@@ -73,28 +73,60 @@
         { thumb: '../pics/small/city45-small.jpg', full: '../pics/city2/city45.jpg', caption: 'Chicago / USA' },
         { thumb: '../pics/small/city46-small.jpg', full: '../pics/city2/city46.jpg', caption: 'Chicago / USA' },
         ];
-    </script>
-    <script>
-        const gallery = document.getElementById("city-gallery");
+    const cityGallery = document.getElementById('city-gallery');
 
-        cityPhotos.forEach(photo => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("data-caption", photo.caption);
+  // build cards like portrait album
+  cityPhotos.forEach(photo => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.caption = photo.caption;
 
-        // small image appears instantly
-        card.style.backgroundImage = `url('${photo.thumb}')`;
+    const img = document.createElement('img');
+    img.src = photo.thumb;              // small first
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = photo.caption || 'City photo';
+    img.dataset.full = photo.full;      // big image for later
 
-        // lazy load full image when in view
-        const img = new Image();
-        img.src = photo.full;
-        img.onload = () => {
-            card.style.backgroundImage = `url('${photo.full}')`;
+    card.appendChild(img);
+    cityGallery.appendChild(card);
+  });
+
+  // lazy swap to full image when in view (same pattern as portrait)
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const card = entry.target;
+        const img = card.querySelector('img');
+        const full = img.dataset.full;
+        if (!full) { obs.unobserve(card); return; }
+
+        const hi = new Image();
+        hi.src = full;
+        hi.onload = () => {
+          img.src = full;
+          delete img.dataset.full;
         };
+        obs.unobserve(card);
+      });
+    }, { rootMargin: '150px 0px' });
 
-        gallery.appendChild(card);
-        });
-    </script>
+    document.querySelectorAll('#city-gallery .card').forEach(card => observer.observe(card));
+  } else {
+    // fallback: just load full immediately
+    document.querySelectorAll('#city-gallery img').forEach(img => {
+      const full = img.dataset.full;
+      if (!full) return;
+      const hi = new Image();
+      hi.src = full;
+      hi.onload = () => {
+        img.src = full;
+        delete img.dataset.full;
+      };
+    });
+  }
+</script>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
