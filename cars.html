@@ -42,28 +42,7 @@
         <div class="contentone">
             <h1>CARS</h1>
         </div>
-            <div class="cards">
-                <div class="card" style="background-image: url('../pics/small/bmw-small.jpg');" data-bg="../pics/bmw.jpg" data-caption="BMW" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/challengerblue-small.JPG');" data-bg="../pics/challengerblue.jpg" data-caption="Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/ycar-small.JPG');" data-bg="../pics/ycar.jpg" data-caption="antique" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/oldblue-small.JPG');" data-bg="../pics/oldblue.jpg" data-caption="antique" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/mar-small.JPG');" data-bg="../pics/mar.jpg" data-caption="AMG" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/marback-small.JPG');" data-bg="../pics/marback.jpg" data-caption="AMG" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/marfront-small.JPG');" data-bg="../pics/marfront.jpg" data-caption="AMG" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/yidk-small.JPG');" data-bg="../pics/yidk.jpg" data-caption="Corvette" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/bporsche-small.JPG');" data-bg="../pics/porsche.jpeg" data-caption="Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/jsrt-small.JPG');" data-bg="../pics/rsrt.jpg" data-caption="SRT" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/bmwb-small.JPG');" data-bg="../pics/bmwb.jpg" data-caption="BMW" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/wporsche-small.JPG');" data-bg="../pics/wporsche.jpg" data-caption="Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/rsrt-small.JPG');" data-bg="../pics/srt.jpeg" data-caption="SRT" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/ycorvette-small.JPG');" data-bg="../pics/ycorvette.jpg" data-caption="Corvette" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/salem-small.JPG');" data-bg="../pics/salem.jpg" data-caption="Bike" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/wchallenger-small.JPG');" data-bg="../pics/wchallenger.jpg" data-caption="Challenger" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/oldwcar-small.jpg');" data-bg="../pics/oldwcar.jpg" data-caption="antique" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/bprosche-small.JPG');" data-bg="../pics/bprosche.jpeg" data-caption="Porsche" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/lambo-small.JPG');" data-bg="../pics/lambo.jpeg" data-caption="Lamborghini" loading="lazy"></div>
-                <div class="card" style="background-image: url('../pics/small/challenge-small.JPG');" data-bg="../pics/challenge.jpg" data-caption="Challenger" loading="lazy"></div>
-            </div>
+        <div class="cards" id="cars-gallery"></div>
         </div>
         <footer class="site-footer">
             © <span id="year"></span> Baki Photography — All rights reserved.
@@ -73,64 +52,111 @@
 
     <!-- Progressive background swap -->
     <script>
-        // Swap blurred small background with full image once loaded
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".card").forEach(card => {
-                const highRes = card.getAttribute("data-bg");
-                if (!highRes) return;
-                const img = new Image();
-                img.src = highRes;
-                img.onload = () => {
-                    card.style.backgroundImage = `url('${highRes}')`;
-                    card.classList.add("loaded");
-                };
-            });
+  // 1) All your car photos defined in one place
+  const cars = [
+    { thumb: '../pics/small/bmw-small.jpg',           full: '../pics/bmw.jpg',           caption: 'BMW' },
+    { thumb: '../pics/small/challengerblue-small.JPG', full: '../pics/challengerblue.jpg', caption: 'Challenger' },
+    { thumb: '../pics/small/ycar-small.JPG',          full: '../pics/ycar.jpg',          caption: 'Antique' },
+    { thumb: '../pics/small/oldblue-small.JPG',       full: '../pics/oldblue.jpg',       caption: 'Antique' },
+    { thumb: '../pics/small/mar-small.JPG',           full: '../pics/mar.jpg',           caption: 'AMG' },
+    { thumb: '../pics/small/marback-small.JPG',       full: '../pics/marback.jpg',       caption: 'AMG' },
+    { thumb: '../pics/small/marfront-small.JPG',      full: '../pics/marfront.jpg',      caption: 'AMG' },
+    { thumb: '../pics/small/yidk-small.JPG',          full: '../pics/yidk.jpg',          caption: 'Corvette' },
+    { thumb: '../pics/small/bporsche-small.JPG',      full: '../pics/porsche.jpg',      caption: 'Porsche' },
+    { thumb: '../pics/small/jsrt-small.JPG',          full: '../pics/rsrt.jpg',          caption: 'SRT' },
+    { thumb: '../pics/small/bmwb-small.JPG',          full: '../pics/bmwb.jpg',          caption: 'BMW' },
+    { thumb: '../pics/small/wporsche-small.JPG',      full: '../pics/wporsche.jpg',      caption: 'Porsche' },
+    { thumb: '../pics/small/rsrt-small.JPG',          full: '../pics/srt.jpg',          caption: 'SRT' },
+    { thumb: '../pics/small/ycorvette-small.JPG',     full: '../pics/ycorvette.jpg',     caption: 'Corvette' },
+    { thumb: '../pics/small/salem-small.JPG',         full: '../pics/salem.jpg',         caption: 'Bike' },
+    { thumb: '../pics/small/wchallenger-small.JPG',   full: '../pics/wchallenger.jpg',   caption: 'Challenger' },
+    { thumb: '../pics/small/oldwcar-small.jpg',       full: '../pics/oldwcar.jpg',       caption: 'Antique' },
+    { thumb: '../pics/small/bprosche-small.JPG',      full: '../pics/bprosche.jpg',     caption: 'Porsche' },
+    { thumb: '../pics/small/lambo-small.JPG',         full: '../pics/lambo.jpg',        caption: 'Lamborghini' },
+    { thumb: '../pics/small/challenge-small.JPG',     full: '../pics/challenge.jpg',     caption: 'Challenger' },
+  ];
 
-            // Footer year
-            const y = document.getElementById('year');
-            if (y) y.textContent = new Date().getFullYear();
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.getElementById('cars-gallery');
+
+    // 2) Build the cards dynamically
+    cars.forEach(photo => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.caption = photo.caption;
+      card.style.backgroundImage = `url('${photo.thumb}')`; // small image first
+      card.dataset.full = photo.full;                       // store full-res path
+      gallery.appendChild(card);
+    });
+
+    // 3) Lazy swap small -> full when card comes into view
+    const cards = document.querySelectorAll('.card');
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          const full = card.dataset.full;
+          if (!full) { io.unobserve(card); return; }
+
+          const img = new Image();
+          img.src = full;
+          img.onload = () => {
+            card.style.backgroundImage = `url('${full}')`;
+            delete card.dataset.full;
+          };
+          io.unobserve(card);
         });
-    </script>
+      }, { rootMargin: '150px 0px' });
 
-    <!-- Tap-to-zoom for mobile -->
-    <script>
-      (function () {
-        const isTouch =
-          window.matchMedia && window.matchMedia('(pointer: coarse)').matches ||
-          'ontouchstart' in window;
+      cards.forEach(card => io.observe(card));
+    } else {
+      // fallback: just load full images
+      cards.forEach(card => {
+        const full = card.dataset.full;
+        if (!full) return;
+        const img = new Image();
+        img.src = full;
+        img.onload = () => {
+          card.style.backgroundImage = `url('${full}')`;
+          delete card.dataset.full;
+        };
+      });
+    }
 
-        const cardsWrap = document.querySelector('.cards');
-        const cards = document.querySelectorAll('.card');
-        if (!cardsWrap || !cards.length) return;
+    // 4) Footer year
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-        if (isTouch) {
-          // Mark container so CSS switches behavior
-          cardsWrap.classList.add('touch-active');
+    // 5) Tap-to-zoom for mobile (uses the same .card.active + .cards.touch-active CSS you already have)
+    const isTouch =
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+      'ontouchstart' in window;
 
-          // Tap a card to toggle zoom
-          cards.forEach(card => {
-            card.addEventListener('click', (e) => {
-              const wasActive = card.classList.contains('active');
-              // close others
-              cards.forEach(c => c.classList.remove('active'));
-              // toggle this one
-              if (!wasActive) card.classList.add('active');
-              e.stopPropagation();
-            }, { passive: true });
-          });
+    const cardsWrap = document.querySelector('.cards');
+    if (isTouch && cardsWrap && cards.length) {
+      cardsWrap.classList.add('touch-active');
 
-          // Tap outside to close
-          document.addEventListener('click', () => {
-            cards.forEach(c => c.classList.remove('active'));
-          }, { passive: true });
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const wasActive = card.classList.contains('active');
+          cards.forEach(c => c.classList.remove('active'));
+          if (!wasActive) card.classList.add('active');
+          e.stopPropagation();
+        }, { passive: true });
+      });
 
-          // Close on ESC (if keyboard)
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') cards.forEach(c => c.classList.remove('active'));
-          });
-        }
-      })();
-    </script>
+      document.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('active'));
+      }, { passive: true });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cards.forEach(c => c.classList.remove('active'));
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
