@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 75px;
 }
 
 /* Navbar styling */
@@ -35,7 +36,9 @@
     cursor: pointer;
 }
 
-
+.navbar ul {
+    flex-wrap: wrap;
+}
 .navbar ul li {
     display: inline-block;
     margin: 0 20px;
@@ -117,15 +120,29 @@ button:hover span {
 button:hover {
     border: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 844px) {
     .banner {
         background-size: cover; /* Cover the entire section */
     }
     
     .navbar ul {
         gap: 10px;
-        scale: 50%;
-        flex-direction: row;
+        scale: 50%; /* consider using transform: scale(0.5); for better support */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .navbar ul li {
+        padding: 10px;
     }
 
     .content h1 {
@@ -142,7 +159,7 @@ button:hover {
     }
 }
 
-/* Adjustments for mobile screens */
+/* Adjustments for smaller mobile screens */
 @media (max-width: 600px) {
     .navbar {
         flex-direction: row;
@@ -175,16 +192,17 @@ button:hover {
         padding: 8px 0;
     }
 }
-.site-footer{
-  position: fixed;            /* stays at the bottom even when scrolling */
+
+.site-footer {
+  position: fixed;            
   left: 50%;
   transform: translateX(-50%);
-  bottom: max(12px, env(safe-area-inset-bottom)); /* friendly on iPhone notch */
+  bottom: max(12px, env(safe-area-inset-bottom));
   color: #fff;
   font-size: 14px;
   letter-spacing: .3px;
   opacity: .85;
-  padding: 6px 10px; /* subtle contrast on busy photos */
+  padding: 6px 10px;
   backdrop-filter: blur(4px);
   z-index: 50;
 }
